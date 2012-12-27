@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="11G56" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="MOTestObject" representedClassName="MOTestObject" syncable="YES"/>
+    <entity name="TestMOObject" representedClassName="TestMOObject" syncable="YES"/>
+    <entity name="TestObject" representedClassName="TestObject" syncable="YES"/>
+    <entity name="TestObjectMO" representedClassName="TestObjectMO" syncable="YES"/>
+    <elements>
+        <element name="TestObject" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="TestObjectMO" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="MOTestObject" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="TestMOObject" positionX="160" positionY="192" width="128" height="45"/>
+    </elements>
+</model>
