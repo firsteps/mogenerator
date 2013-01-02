@@ -447,6 +447,15 @@ static MiscMergeEngine* engineWithTemplateDesc(MogeneratorTemplateDesc *template
     return [[[MiscMergeEngine alloc] initWithTemplate:template] autorelease];
 }
 
+static NSString *generateFromTemplateAndEntity(NSString *templateString, NSEntityDescription *entity) {
+    MiscMergeTemplate *template = [[[MiscMergeTemplate alloc] init] autorelease];
+    [template setStartDelimiter:@"<$" endDelimiter:@"$>"];
+    [template parseString:templateString];
+    MiscMergeEngine *engine = [[[MiscMergeEngine alloc] initWithTemplate:template] autorelease];
+    assert(engine);
+    return [engine executeWithObject:entity sender:nil];
+}
+
 @implementation MOGeneratorApp
 
 - (id)init {
@@ -503,6 +512,9 @@ NSString *ApplicationSupportSubdirectoryName = @"mogenerator";
     [optionsParser setGetoptLongOnly:YES];
     DDGetoptOption optionTable[] = 
     {
+    // CTX additions:
+    {@"output-filename-template",       0,      DDGetoptRequiredArgument},
+        
     // Long                 Short   Argument options
     {@"model",              'm',    DDGetoptRequiredArgument},
     {@"configuration",      'C',    DDGetoptRequiredArgument},
@@ -534,6 +546,8 @@ NSString *ApplicationSupportSubdirectoryName = @"mogenerator";
 - (void)printUsage {
     ddprintf(@"%@: Usage [OPTIONS] <argument> [...]\n", DDCliApp);
     printf("\n"
+           "      --output-filename-template TEMPLATE    Template used to form output classes' files' names (CTX addition)\n"
+
            "  -m, --model MODEL             Path to model\n"
            "  -C, --configuration CONFIG    Only consider entities included in the named configuration\n"
            "      --base-class CLASS        Custom base class\n"
@@ -848,10 +862,22 @@ NSString *ApplicationSupportSubdirectoryName = @"mogenerator";
             
             NSString *entityClassName = [entity managedObjectClassName];
             BOOL machineDirtied = NO;
+
+            // CTX addition for more flexible output files' names generation
+            NSString *generatedFilename = nil;
+            if (outputFilenameTemplate) {
+                generatedFilename = generateFromTemplateAndEntity(outputFilenameTemplate, entity);
+            }
             
             // Machine header files.
-            NSString *machineHFileName = [machineDir stringByAppendingPathComponent:
-                [NSString stringWithFormat:@"_%@.h", entityClassName]];
+            NSString *machineHFileName = nil;
+            if (generatedFilename) {
+                machineHFileName = [machineDir stringByAppendingPathComponent:
+                                    [NSString stringWithFormat:@"_%@.h", generatedFilename]];
+            } else {
+                machineHFileName = [machineDir stringByAppendingPathComponent:
+                                    [NSString stringWithFormat:@"_%@.h", entityClassName]];
+            }
             if (_listSourceFiles) {
                 [machineHFiles addObject:machineHFileName];
             } else {
@@ -864,8 +890,14 @@ NSString *ApplicationSupportSubdirectoryName = @"mogenerator";
             }
             
             // Machine source files.
-            NSString *machineMFileName = [machineDir stringByAppendingPathComponent:
-                [NSString stringWithFormat:@"_%@.m", entityClassName]];
+            NSString *machineMFileName = nil;
+            if (generatedFilename) {
+                machineMFileName = [machineDir stringByAppendingPathComponent:
+                                    [NSString stringWithFormat:@"_%@.m", generatedFilename]];
+            } else {
+                machineMFileName = [machineDir stringByAppendingPathComponent:
+                                    [NSString stringWithFormat:@"_%@.m", entityClassName]];
+            }
             if (_listSourceFiles) {
                 [machineMFiles addObject:machineMFileName];
             } else {
@@ -878,8 +910,14 @@ NSString *ApplicationSupportSubdirectoryName = @"mogenerator";
             }
             
             // Human header files.
-            NSString *humanHFileName = [humanDir stringByAppendingPathComponent:
-                [NSString stringWithFormat:@"%@.h", entityClassName]];
+            NSString *humanHFileName = nil;
+            if (generatedFilename) {
+                humanHFileName = [humanDir stringByAppendingPathComponent:
+                                  [NSString stringWithFormat:@"%@.h", generatedFilename]];
+            } else {
+                humanHFileName = [humanDir stringByAppendingPathComponent:
+                                  [NSString stringWithFormat:@"%@.h", entityClassName]];
+            }
             if (_listSourceFiles) {
                 [humanHFiles addObject:humanHFileName];
             } else {
@@ -893,10 +931,22 @@ NSString *ApplicationSupportSubdirectoryName = @"mogenerator";
             }
             
             //  Human source files.
-            NSString *humanMFileName = [humanDir stringByAppendingPathComponent:
-                [NSString stringWithFormat:@"%@.m", entityClassName]];
-            NSString *humanMMFileName = [humanDir stringByAppendingPathComponent:
-                [NSString stringWithFormat:@"%@.mm", entityClassName]];
+            NSString *humanMFileName = nil;
+            if (generatedFilename) {
+                humanMFileName = [humanDir stringByAppendingPathComponent:
+                                  [NSString stringWithFormat:@"%@.m", generatedFilename]];
+            } else {
+                humanMFileName = [humanDir stringByAppendingPathComponent:
+                                  [NSString stringWithFormat:@"%@.m", entityClassName]];
+            }
+            NSString *humanMMFileName = nil;
+            if (generatedFilename) {
+                humanMMFileName = [humanDir stringByAppendingPathComponent:
+                                   [NSString stringWithFormat:@"%@.mm", generatedFilename]];
+            } else {
+                humanMMFileName = [humanDir stringByAppendingPathComponent:
+                                   [NSString stringWithFormat:@"%@.mm", entityClassName]];
+            }
             if (![fm regularFileExistsAtPath:humanMFileName] && [fm regularFileExistsAtPath:humanMMFileName]) {
                 //  Allow .mm human files as well as .m files.
                 humanMFileName = humanMMFileName;

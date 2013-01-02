@@ -68,6 +68,10 @@
     NSString              *machineDir;
     NSString              *humanDir;
     NSString              *templateGroup;
+
+    // CTX addition
+    NSString              *outputFilenameTemplate;
+    
     BOOL                  _help;
     BOOL                  _version;
     BOOL                  _listSourceFiles;
