@@ -22,6 +22,8 @@ extern NSString * const kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOW
 
 - (NSString *)CTX_dtoClassName;
 
+- (NSString *)CTX_dtoSuperclassName;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////

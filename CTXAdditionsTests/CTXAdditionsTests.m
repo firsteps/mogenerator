@@ -19,6 +19,7 @@
     [super setUp];
     
     // Set-up code here.
+    
     NSURL *modelURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"TestDataModel" withExtension:@"momd"];
     _model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
 }
@@ -27,10 +28,13 @@
 {
     // Tear-down code here.
     
+    [_model release];
+    _model = nil;
+    
     [super tearDown];
 }
 
-- (void)test_01_NSEntityDescription_dtoClassNameIsGeneratedCorrectly
+- (void)test_010_NSEntityDescription_dtoClassNameIsGeneratedCorrectly
 {
     NSEntityDescription *entity = nil;
     
@@ -47,7 +51,24 @@
     STAssertEqualObjects(@"TestObjectDTO", [entity CTX_dtoClassName], @"DTO class name is incorrect");
 }
 
-- (void)test_02_NSPropertyDescription_shouldBePersistedInDTO
+- (void)test_020_NSEntityDescription_dtoSuperclassNameIsGeneratedCorrectly
+{
+    NSEntityDescription *entity = nil;
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestObject"];
+    STAssertEqualObjects(@"NSObject", [entity CTX_dtoSuperclassName], @"DTO superclass name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"MOTestObject"];
+    STAssertEqualObjects(@"MOBaseObjectDTO", [entity CTX_dtoSuperclassName], @"DTO superclass name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestMOObject"];
+    STAssertEqualObjects(@"BaseMOObjectDTO", [entity CTX_dtoSuperclassName], @"DTO superclass name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestObjectMO"];
+    STAssertEqualObjects(@"NSObject", [entity CTX_dtoSuperclassName], @"DTO superclass name is incorrect");
+}
+
+- (void)test_030_NSPropertyDescription_shouldBePersistedInDTO
 {
     NSPropertyDescription *property = [[NSPropertyDescription alloc] init];
 
@@ -81,7 +102,7 @@
     STAssertFalse([property CTX_shouldBePersistedInDTO], @"- [NSPropertyDescription CTX_shouldBePersistedInDTO] is broken");
 }
 
-- (void)test_03_NSPropertyDescription_isMandatoryInDTO
+- (void)test_040_NSPropertyDescription_isMandatoryInDTO
 {    
     NSPropertyDescription *property = [[NSPropertyDescription alloc] init];
 
@@ -115,7 +136,7 @@
     STAssertTrue([property CTX_isMandatoryInDTO], @"- [NSPropertyDescription CTX_isMandatoryInDTO] is broken");
 }
 
-- (void)test_04_NSRelationshipDescription_shouldBeDeletedWhenUnset
+- (void)test_050_NSRelationshipDescription_shouldBeDeletedWhenUnset
 {
     NSRelationshipDescription *relationship = [[NSRelationshipDescription alloc] init];
     
@@ -149,7 +170,7 @@
     STAssertFalse([relationship CTX_shouldBeDeletedWhenUnset], @"- [NSRelationshipDescription CTX_shouldBeDeletedWhenUnset] is broken");    
 }
 
-- (void)test_05_NSRelationshipDescription_shouldBeRepopulatedFromDTOWhenSet
+- (void)test_060_NSRelationshipDescription_shouldBeRepopulatedFromDTOWhenSet
 {
     NSRelationshipDescription *relationship = [[NSRelationshipDescription alloc] init];
     

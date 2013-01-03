@@ -8,6 +8,8 @@
 
 #import "mogenerator+CTX.h"
 
+#import "mogenerator.h"
+
 NSString * const kCTXNSPropertyDescriptionShouldNotBePersistedInDTO_key = @"com.ef.ctx.mogenerator.dto.shouldNotBePersisted";
 NSString * const kCTXNSPropertyDescriptionIsMandatoryInDTO_key = @"com.ef.ctx.mogenerator.dto.mandatory";
 NSString * const kCTXNSRelationshipDescriptionShouldNotBeDeletedWhenUnset_key = @"com.ef.ctx.mogenerator.mo.shouldNotBeDeletedWhenUnset";
@@ -32,20 +34,35 @@ static inline BOOL stringContainsPositiveResponse(NSString *string)
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-@implementation NSEntityDescription (CTX)
-
-- (NSString *)CTX_dtoClassName
+static NSString *dtoClassNameForManagedObjectClassName(NSString *managedObjectClassName)
 {
     static NSString * const kMOSuffix = @"MO";
     static NSString * const kDTOSuffix = @"DTO";
     
-    NSString *normalizedManagedObjectClassName = [self managedObjectClassName];
-    BOOL managedObjectClassNameEndsWithMO = [[self managedObjectClassName] hasSuffix:kMOSuffix];
+    NSString *normalizedManagedObjectClassName = managedObjectClassName;
+    BOOL managedObjectClassNameEndsWithMO = [managedObjectClassName hasSuffix:kMOSuffix];
     if (managedObjectClassNameEndsWithMO) {
         NSRange suffixRange = [normalizedManagedObjectClassName rangeOfString:kMOSuffix options:NSBackwardsSearch];
         normalizedManagedObjectClassName = [normalizedManagedObjectClassName stringByReplacingCharactersInRange:suffixRange withString:@""];
     }
     return [NSString stringWithFormat:@"%@%@", normalizedManagedObjectClassName, kDTOSuffix];
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+@implementation NSEntityDescription (CTX)
+
+- (NSString *)CTX_dtoClassName
+{
+    return dtoClassNameForManagedObjectClassName([self managedObjectClassName]);
+}
+
+- (NSString *)CTX_dtoSuperclassName {
+    BOOL superentityHasCustomClass = ([[self customSuperentity] isEqualToString:NSStringFromClass([NSManagedObject class])] == NO);
+    if (superentityHasCustomClass) {
+        return dtoClassNameForManagedObjectClassName([self customSuperentity]);
+    }
+    return @"NSObject";
 }
 
 @end
