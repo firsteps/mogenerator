@@ -3,19 +3,32 @@
     <entity name="BaseMOObject" representedClassName="BaseMOObject" syncable="YES"/>
     <entity name="BaseObject" representedClassName="BaseObject" syncable="YES"/>
     <entity name="BaseObjectMO" representedClassName="" syncable="YES"/>
+    <entity name="CustomBaseObject" representedClassName="CustomBaseObject" syncable="YES">
+        <userInfo>
+            <entry key="com.ef.ctx.mogenerator.dto.className" value="CustomBaseDTOClass"/>
+        </userInfo>
+    </entity>
+    <entity name="CustomTestObject" representedClassName="CustomTestObject" parentEntity="CustomBaseObject" syncable="YES">
+        <userInfo>
+            <entry key="com.ef.ctx.mogenerator.dto.className" value="CustomDTOClass"/>
+            <entry key="com.ef.ctx.mogenerator.repository.className" value="CustomRepository"/>
+        </userInfo>
+    </entity>
     <entity name="MOBaseObject" representedClassName="MOBaseObject" syncable="YES"/>
     <entity name="MOTestObject" representedClassName="MOTestObject" parentEntity="MOBaseObject" syncable="YES"/>
     <entity name="TestMOObject" representedClassName="TestMOObject" parentEntity="BaseMOObject" syncable="YES"/>
     <entity name="TestObject" representedClassName="TestObject" syncable="YES"/>
     <entity name="TestObjectMO" representedClassName="TestObjectMO" parentEntity="BaseObjectMO" syncable="YES"/>
     <elements>
+        <element name="BaseMOObject" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="BaseObject" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="BaseObjectMO" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="MOBaseObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="MOTestObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestMOObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestObjectMO" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="MOBaseObject" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="BaseMOObject" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="BaseObject" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="BaseObjectMO" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="CustomTestObject" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="CustomBaseObject" positionX="160" positionY="192" width="128" height="45"/>
     </elements>
 </model>

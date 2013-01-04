@@ -49,6 +49,9 @@
 
     entity = [[_model entitiesByName] objectForKey:@"TestObjectMO"];
     STAssertEqualObjects(@"TestObjectDTO", [entity CTX_dtoClassName], @"DTO class name is incorrect");
+
+    entity = [[_model entitiesByName] objectForKey:@"CustomTestObject"];
+    STAssertEqualObjects(@"CustomDTOClass", [entity CTX_dtoClassName], @"DTO class name is incorrect");
 }
 
 - (void)test_020_NSEntityDescription_dtoSuperclassNameIsGeneratedCorrectly
@@ -66,6 +69,29 @@
     
     entity = [[_model entitiesByName] objectForKey:@"TestObjectMO"];
     STAssertEqualObjects(@"NSObject", [entity CTX_dtoSuperclassName], @"DTO superclass name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"CustomTestObject"];
+    STAssertEqualObjects(@"CustomBaseDTOClass", [entity CTX_dtoSuperclassName], @"DTO superclass name is incorrect");
+}
+
+- (void)test_025_NSEntityDescription_RepositoryNameIsGeneratedCorrectly
+{
+    NSEntityDescription *entity = nil;
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestObject"];
+    STAssertEqualObjects(@"TestObjectDTOObjectsRepository", [entity CTX_repositoryClassName], @"Repository class name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"MOTestObject"];
+    STAssertEqualObjects(@"MOTestObjectDTOObjectsRepository", [entity CTX_repositoryClassName], @"Repository class name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestMOObject"];
+    STAssertEqualObjects(@"TestMOObjectDTOObjectsRepository", [entity CTX_repositoryClassName], @"Repository class name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestObjectMO"];
+    STAssertEqualObjects(@"TestObjectDTOObjectsRepository", [entity CTX_repositoryClassName], @"Repository class name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"CustomTestObject"];
+    STAssertEqualObjects(@"CustomRepository", [entity CTX_repositoryClassName], @"Repository class name is incorrect");
 }
 
 - (void)test_030_NSPropertyDescription_shouldBePersistedInDTO

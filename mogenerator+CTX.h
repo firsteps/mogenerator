@@ -15,6 +15,9 @@ extern NSString * const kCTXNSPropertyDescriptionIsMandatoryInDTO_key;
 extern NSString * const kCTXNSRelationshipDescriptionShouldNotBeDeletedWhenUnset_key;
 extern NSString * const kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOWhenSet_key;
 
+extern NSString * const kCTXNSPropertyDescriptionDTOClassName_key;
+extern NSString * const kCTXNSPropertyDescriptionRepositoryClassName_key;
+
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -23,6 +26,8 @@ extern NSString * const kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOW
 - (NSString *)CTX_dtoClassName;
 
 - (NSString *)CTX_dtoSuperclassName;
+
+- (NSString *)CTX_repositoryClassName;
 
 @end
 

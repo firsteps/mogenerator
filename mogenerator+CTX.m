@@ -15,6 +15,10 @@ NSString * const kCTXNSPropertyDescriptionIsMandatoryInDTO_key = @"com.ef.ctx.mo
 NSString * const kCTXNSRelationshipDescriptionShouldNotBeDeletedWhenUnset_key = @"com.ef.ctx.mogenerator.mo.shouldNotBeDeletedWhenUnset";
 NSString * const kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOWhenSet_key = @"com.ef.ctx.mogenerator.mo.shouldBeRepopulatedFromDTOWhenSet";
 
+NSString * const kCTXNSPropertyDescriptionDTOClassName_key = @"com.ef.ctx.mogenerator.dto.className";
+NSString * const kCTXNSPropertyDescriptionRepositoryClassName_key = @"com.ef.ctx.mogenerator.repository.className";
+
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 static inline BOOL stringContainsNegativeResponse(NSString *string)
@@ -54,15 +58,30 @@ static NSString *dtoClassNameForManagedObjectClassName(NSString *managedObjectCl
 
 - (NSString *)CTX_dtoClassName
 {
-    return dtoClassNameForManagedObjectClassName([self managedObjectClassName]);
+    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionDTOClassName_key];
+    if (value == nil) {
+        value = dtoClassNameForManagedObjectClassName([self managedObjectClassName]);
+    }
+    return value;
 }
 
 - (NSString *)CTX_dtoSuperclassName {
-    BOOL superentityHasCustomClass = ([[self customSuperentity] isEqualToString:NSStringFromClass([NSManagedObject class])] == NO);
-    if (superentityHasCustomClass) {
-        return dtoClassNameForManagedObjectClassName([self customSuperentity]);
+    NSEntityDescription *superentity = [self superentity];
+    NSString *managedObjectClassName = ([[superentity managedObjectClassName] length] > 0) ? [superentity managedObjectClassName] : NSStringFromClass([NSManagedObject class]);
+    BOOL superentityIsCustom = (superentity && ([managedObjectClassName isEqualToString:NSStringFromClass([NSManagedObject class])] == NO));
+    if (superentityIsCustom) {
+//        return dtoClassNameForManagedObjectClassName([self customSuperentity]);
+        return [superentity CTX_dtoClassName];
     }
     return @"NSObject";
+}
+
+- (NSString *)CTX_repositoryClassName {
+    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionRepositoryClassName_key];
+    if (value == nil) {
+        value = [NSString stringWithFormat:@"%@ObjectsRepository", [self CTX_dtoClassName]];
+    }
+    return value;
 }
 
 @end
