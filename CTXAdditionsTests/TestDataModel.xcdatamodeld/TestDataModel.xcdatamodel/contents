@@ -11,7 +11,10 @@
     <entity name="CustomTestObject" representedClassName="CustomTestObject" parentEntity="CustomBaseObject" syncable="YES">
         <userInfo>
             <entry key="com.ef.ctx.mogenerator.dto.className" value="CustomDTOClass"/>
-            <entry key="com.ef.ctx.mogenerator.repository.className" value="CustomRepository"/>
+            <entry key="com.ef.ctx.mogenerator.repository.action.protocolName" value="CustomRepositoryActionProtocol"/>
+            <entry key="com.ef.ctx.mogenerator.repository.localDB.className" value="CustomLocalDBRepository"/>
+            <entry key="com.ef.ctx.mogenerator.repository.protocolName" value="CustomRepositoryProtocol"/>
+            <entry key="com.ef.ctx.mogenerator.repository.remoteWebService.className" value="CustomRemoteWebServiceRepository"/>
         </userInfo>
     </entity>
     <entity name="MOBaseObject" representedClassName="MOBaseObject" syncable="YES"/>
@@ -23,12 +26,12 @@
         <element name="BaseMOObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="BaseObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="BaseObjectMO" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="CustomBaseObject" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="CustomTestObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="MOBaseObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="MOTestObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestMOObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestObjectMO" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="CustomTestObject" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="CustomBaseObject" positionX="160" positionY="192" width="128" height="45"/>
     </elements>
 </model>

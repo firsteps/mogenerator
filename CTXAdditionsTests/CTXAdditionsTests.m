@@ -74,24 +74,84 @@
     STAssertEqualObjects(@"CustomBaseDTOClass", [entity CTX_dtoSuperclassName], @"DTO superclass name is incorrect");
 }
 
-- (void)test_025_NSEntityDescription_RepositoryNameIsGeneratedCorrectly
+- (void)test_022_NSEntityDescription_RepositoryProtocolNameIsGeneratedCorrectly
 {
     NSEntityDescription *entity = nil;
     
     entity = [[_model entitiesByName] objectForKey:@"TestObject"];
-    STAssertEqualObjects(@"TestObjectDTOObjectsRepository", [entity CTX_repositoryClassName], @"Repository class name is incorrect");
+    STAssertEqualObjects(@"TestObjectDTOObjectsRepositoryProtocol", [entity CTX_repositoryProtocolName], @"Repository protocol name is incorrect");
     
     entity = [[_model entitiesByName] objectForKey:@"MOTestObject"];
-    STAssertEqualObjects(@"MOTestObjectDTOObjectsRepository", [entity CTX_repositoryClassName], @"Repository class name is incorrect");
+    STAssertEqualObjects(@"MOTestObjectDTOObjectsRepositoryProtocol", [entity CTX_repositoryProtocolName], @"Repository protocol name is incorrect");
     
     entity = [[_model entitiesByName] objectForKey:@"TestMOObject"];
-    STAssertEqualObjects(@"TestMOObjectDTOObjectsRepository", [entity CTX_repositoryClassName], @"Repository class name is incorrect");
+    STAssertEqualObjects(@"TestMOObjectDTOObjectsRepositoryProtocol", [entity CTX_repositoryProtocolName], @"Repository protocol name is incorrect");
     
     entity = [[_model entitiesByName] objectForKey:@"TestObjectMO"];
-    STAssertEqualObjects(@"TestObjectDTOObjectsRepository", [entity CTX_repositoryClassName], @"Repository class name is incorrect");
+    STAssertEqualObjects(@"TestObjectDTOObjectsRepositoryProtocol", [entity CTX_repositoryProtocolName], @"Repository protocol name is incorrect");
     
     entity = [[_model entitiesByName] objectForKey:@"CustomTestObject"];
-    STAssertEqualObjects(@"CustomRepository", [entity CTX_repositoryClassName], @"Repository class name is incorrect");
+    STAssertEqualObjects(@"CustomRepositoryProtocol", [entity CTX_repositoryProtocolName], @"Repository protocol name is incorrect");
+}
+
+- (void)test_025_NSEntityDescription_RepositoryActionProtocolNameIsGeneratedCorrectly
+{
+    NSEntityDescription *entity = nil;
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestObject"];
+    STAssertEqualObjects(@"TestObjectDTOObjectsRepositoryActionProtocol", [entity CTX_repositoryActionProtocolName], @"Repository Action protocol name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"MOTestObject"];
+    STAssertEqualObjects(@"MOTestObjectDTOObjectsRepositoryActionProtocol", [entity CTX_repositoryActionProtocolName], @"Repository Action protocol name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestMOObject"];
+    STAssertEqualObjects(@"TestMOObjectDTOObjectsRepositoryActionProtocol", [entity CTX_repositoryActionProtocolName], @"Repository Action protocol is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestObjectMO"];
+    STAssertEqualObjects(@"TestObjectDTOObjectsRepositoryActionProtocol", [entity CTX_repositoryActionProtocolName], @"Repository Action protocol is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"CustomTestObject"];
+    STAssertEqualObjects(@"CustomRepositoryActionProtocol", [entity CTX_repositoryActionProtocolName], @"Repository Action protocol name is incorrect");
+}
+
+- (void)test_025_NSEntityDescription_LocalDBRepositoryClassNameIsGeneratedCorrectly
+{
+    NSEntityDescription *entity = nil;
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestObject"];
+    STAssertEqualObjects(@"TestObjectDTOObjectsLocalDBRepository", [entity CTX_localDBRepositoryClassName], @"Local DB Repository class name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"MOTestObject"];
+    STAssertEqualObjects(@"MOTestObjectDTOObjectsLocalDBRepository", [entity CTX_localDBRepositoryClassName], @"Local DB Repository class name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestMOObject"];
+    STAssertEqualObjects(@"TestMOObjectDTOObjectsLocalDBRepository", [entity CTX_localDBRepositoryClassName], @"Local DB Repository class name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestObjectMO"];
+    STAssertEqualObjects(@"TestObjectDTOObjectsLocalDBRepository", [entity CTX_localDBRepositoryClassName], @"Local DB Repository class name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"CustomTestObject"];
+    STAssertEqualObjects(@"CustomLocalDBRepository", [entity CTX_localDBRepositoryClassName], @"Local DB Repository class name is incorrect");
+}
+
+- (void)test_025_NSEntityDescription_RemoteWebServiceRepositoryClassNameIsGeneratedCorrectly
+{
+    NSEntityDescription *entity = nil;
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestObject"];
+    STAssertEqualObjects(@"TestObjectDTOObjectsRemoteWebServiceRepository", [entity CTX_remoteWebServiceRepositoryClassName], @"Remote Web Service Repository class name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"MOTestObject"];
+    STAssertEqualObjects(@"MOTestObjectDTOObjectsRemoteWebServiceRepository", [entity CTX_remoteWebServiceRepositoryClassName], @"Remote Web Service Repository class name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestMOObject"];
+    STAssertEqualObjects(@"TestMOObjectDTOObjectsRemoteWebServiceRepository", [entity CTX_remoteWebServiceRepositoryClassName], @"Remote Web Service Repository class name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"TestObjectMO"];
+    STAssertEqualObjects(@"TestObjectDTOObjectsRemoteWebServiceRepository", [entity CTX_remoteWebServiceRepositoryClassName], @"Remote Web Service Repository class name is incorrect");
+    
+    entity = [[_model entitiesByName] objectForKey:@"CustomTestObject"];
+    STAssertEqualObjects(@"CustomRemoteWebServiceRepository", [entity CTX_remoteWebServiceRepositoryClassName], @"Remote Web Service Repository class name is incorrect");
 }
 
 - (void)test_030_NSPropertyDescription_shouldBePersistedInDTO

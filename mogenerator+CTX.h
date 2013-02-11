@@ -16,7 +16,11 @@ extern NSString * const kCTXNSRelationshipDescriptionShouldNotBeDeletedWhenUnset
 extern NSString * const kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOWhenSet_key;
 
 extern NSString * const kCTXNSPropertyDescriptionDTOClassName_key;
-extern NSString * const kCTXNSPropertyDescriptionRepositoryClassName_key;
+
+extern NSString * const kCTXNSPropertyDescriptionRepositoryProtocolName_key;
+extern NSString * const kCTXNSPropertyDescriptionRepositoryActionProtocolName_key;
+extern NSString * const kCTXNSPropertyDescriptionLocalDBRepositoryClassName_key;
+extern NSString * const kCTXNSPropertyDescriptionRemoteWebServiceRepositoryClassName_key;
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +31,13 @@ extern NSString * const kCTXNSPropertyDescriptionRepositoryClassName_key;
 
 - (NSString *)CTX_dtoSuperclassName;
 
-- (NSString *)CTX_repositoryClassName;
+- (NSString *)CTX_repositoryProtocolName;
+
+- (NSString *)CTX_repositoryActionProtocolName;
+
+- (NSString *)CTX_localDBRepositoryClassName;
+
+- (NSString *)CTX_remoteWebServiceRepositoryClassName;
 
 @end
 
