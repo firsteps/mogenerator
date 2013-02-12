@@ -1,9 +1,7 @@
-/*******************************************************************************
-    mogenerator.m - <http://github.com/rentzsch/mogenerator>
-        Copyright (c) 2006-2012 Jonathan 'Wolf' Rentzsch: <http://rentzsch.com>
-        Some rights reserved: <http://opensource.org/licenses/mit-license.php>
-
-    ***************************************************************************/
+// mogenerator.m
+//   Copyright (c) 2006-2013 Jonathan 'Wolf' Rentzsch: http://rentzsch.com
+//   Some rights reserved: http://opensource.org/licenses/mit
+//   http://github.com/rentzsch/mogenerator
 
 #import "mogenerator.h"
 #import "RegexKitLite.h"
@@ -79,6 +77,14 @@ NSString  *gCustomBaseClassForced;
 - (NSString*)baseClassImport {
     return gCustomBaseClassImport;
 }
+- (BOOL)hasSuperentity {
+    NSEntityDescription *superentity = [self superentity];
+    if (superentity) {
+        return YES;
+    }
+    return NO;
+}
+
 - (BOOL)hasCustomSuperentity {
     NSString *forcedBaseClass = [self forcedCustomBaseClass];
     if (!forcedBaseClass) {
@@ -121,6 +127,18 @@ NSString  *gCustomBaseClassForced;
     } else {
         return [[[self attributesByName] allValues] sortedArrayUsingDescriptors:sortDescriptors];
     }
+}
+/** @TypeInfo NSAttributeDescription */
+- (NSArray*)noninheritedAttributesSansType {
+    NSArray *attributeDescriptions = [self noninheritedAttributes];
+    NSMutableArray *filteredAttributeDescriptions = [NSMutableArray arrayWithCapacity:[attributeDescriptions count]];
+    
+    nsenumerate(attributeDescriptions, NSAttributeDescription, attributeDescription) {
+        if (![[attributeDescription name] isEqualToString:@"type"]) {
+            [filteredAttributeDescriptions addObject:attributeDescription];
+        }
+    }
+    return filteredAttributeDescriptions;
 }
 /** @TypeInfo NSAttributeDescription */
 - (NSArray*)noninheritedRelationships {
@@ -179,9 +197,14 @@ NSString  *gCustomBaseClassForced;
     
     NSEntityDescription *entity = self;
     nsenumerate(components, NSString, key) {
-        NSRelationshipDescription *relationship = [[entity relationshipsByName] objectForKey:key];
-        assert(relationship);
-        entity = [relationship destinationEntity];
+        id property = [[entity propertiesByName] objectForKey:key];
+        if ([property isKindOfClass:[NSAttributeDescription class]]) {
+            NSString *result = [property objectAttributeType];
+            return [result substringToIndex:[result length] -1];
+        } else if ([property isKindOfClass:[NSRelationshipDescription class]]) {
+            entity = [property destinationEntity];
+        }
+        assert(property);
     }
     
     return [entity managedObjectClassName];
