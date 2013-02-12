@@ -3,6 +3,9 @@
     <entity name="BaseMOObject" representedClassName="BaseMOObject" syncable="YES"/>
     <entity name="BaseObject" representedClassName="BaseObject" syncable="YES"/>
     <entity name="BaseObjectMO" representedClassName="" syncable="YES"/>
+    <entity name="Child" representedClassName="Child" syncable="YES">
+        <relationship name="parent" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Parent" inverseName="children" inverseEntity="Parent" syncable="YES"/>
+    </entity>
     <entity name="CustomBaseObject" representedClassName="CustomBaseObject" syncable="YES">
         <userInfo>
             <entry key="com.ef.ctx.mogenerator.dto.className" value="CustomBaseDTOClass"/>
@@ -19,6 +22,13 @@
     </entity>
     <entity name="MOBaseObject" representedClassName="MOBaseObject" syncable="YES"/>
     <entity name="MOTestObject" representedClassName="MOTestObject" parentEntity="MOBaseObject" syncable="YES"/>
+    <entity name="OrderedChild" representedClassName="OrderedChild" syncable="YES">
+        <relationship name="parent" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Parent" inverseName="orderedChildren" inverseEntity="Parent" syncable="YES"/>
+    </entity>
+    <entity name="Parent" representedClassName="Parent" syncable="YES">
+        <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Child" inverseName="parent" inverseEntity="Child" syncable="YES"/>
+        <relationship name="orderedChildren" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="OrderedChild" inverseName="parent" inverseEntity="OrderedChild" syncable="YES"/>
+    </entity>
     <entity name="TestMOObject" representedClassName="TestMOObject" parentEntity="BaseMOObject" syncable="YES"/>
     <entity name="TestObject" representedClassName="TestObject" syncable="YES"/>
     <entity name="TestObjectMO" representedClassName="TestObjectMO" parentEntity="BaseObjectMO" syncable="YES"/>
@@ -33,5 +43,8 @@
         <element name="TestMOObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestObjectMO" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="Parent" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="OrderedChild" positionX="160" positionY="192" width="128" height="60"/>
+        <element name="Child" positionX="160" positionY="192" width="128" height="60"/>
     </elements>
 </model>
