@@ -17,12 +17,6 @@ extern NSString * const kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOW
 
 extern NSString * const kCTXNSPropertyDescriptionDTOClassName_key;
 
-extern NSString * const kCTXNSPropertyDescriptionRepositoryProtocolName_key;
-extern NSString * const kCTXNSPropertyDescriptionRepositoryActionProtocolName_key;
-extern NSString * const kCTXNSPropertyDescriptionLocalDBRepositoryClassName_key;
-extern NSString * const kCTXNSPropertyDescriptionRemoteWebServiceRepositoryClassName_key;
-
-
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 @interface NSEntityDescription (CTX)
@@ -30,14 +24,6 @@ extern NSString * const kCTXNSPropertyDescriptionRemoteWebServiceRepositoryClass
 - (NSString *)CTX_dtoClassName;
 
 - (NSString *)CTX_dtoSuperclassName;
-
-- (NSString *)CTX_repositoryProtocolName;
-
-- (NSString *)CTX_repositoryActionProtocolName;
-
-- (NSString *)CTX_localDBRepositoryClassName;
-
-- (NSString *)CTX_remoteWebServiceRepositoryClassName;
 
 @end
 

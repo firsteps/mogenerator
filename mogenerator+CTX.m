@@ -17,11 +17,6 @@ NSString * const kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOWhenSet_
 
 NSString * const kCTXNSPropertyDescriptionDTOClassName_key = @"com.ef.ctx.mogenerator.dto.className";
 
-NSString * const kCTXNSPropertyDescriptionRepositoryProtocolName_key = @"com.ef.ctx.mogenerator.repository.protocolName";
-NSString * const kCTXNSPropertyDescriptionRepositoryActionProtocolName_key = @"com.ef.ctx.mogenerator.repository.action.protocolName";
-NSString * const kCTXNSPropertyDescriptionLocalDBRepositoryClassName_key = @"com.ef.ctx.mogenerator.repository.localDB.className";
-NSString * const kCTXNSPropertyDescriptionRemoteWebServiceRepositoryClassName_key = @"com.ef.ctx.mogenerator.repository.remoteWebService.className";
-
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -78,38 +73,6 @@ static NSString *dtoClassNameForManagedObjectClassName(NSString *managedObjectCl
         return [superentity CTX_dtoClassName];
     }
     return @"NSObject";
-}
-
-- (NSString *)CTX_repositoryProtocolName {
-    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionRepositoryProtocolName_key];
-    if (value == nil) {
-        value = [NSString stringWithFormat:@"%@ObjectsRepositoryProtocol", [self CTX_dtoClassName]];
-    }
-    return value;
-}
-
-- (NSString *)CTX_repositoryActionProtocolName {
-    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionRepositoryActionProtocolName_key];
-    if (value == nil) {
-        value = [NSString stringWithFormat:@"%@ObjectsRepositoryActionProtocol", [self CTX_dtoClassName]];
-    }
-    return value;
-}
-
-- (NSString *)CTX_localDBRepositoryClassName {
-    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionLocalDBRepositoryClassName_key];
-    if (value == nil) {
-        value = [NSString stringWithFormat:@"%@ObjectsLocalDBRepository", [self CTX_dtoClassName]];
-    }
-    return value;
-}
-
-- (NSString *)CTX_remoteWebServiceRepositoryClassName {
-    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionRemoteWebServiceRepositoryClassName_key];
-    if (value == nil) {
-        value = [NSString stringWithFormat:@"%@ObjectsRemoteWebServiceRepository", [self CTX_dtoClassName]];
-    }
-    return value;
 }
 
 @end
