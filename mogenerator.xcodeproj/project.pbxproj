@@ -240,7 +240,7 @@
 		79D2C00E0ACFB81200F3F141 /* nsenumerate.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = nsenumerate.h; sourceTree = "<group>"; };
 		79D2C0570ACFBCB500F3F141 /* FoundationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FoundationAdditions.h; sourceTree = "<group>"; };
 		79D2C0580ACFBCB500F3F141 /* FoundationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FoundationAdditions.m; sourceTree = "<group>"; };
-		8DD76FA10486AA7600D96B5E /* mogenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mogenerator; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD76FA10486AA7600D96B5E /* mogenerator-ctx-debug */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "mogenerator-ctx-debug"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -354,7 +354,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8DD76FA10486AA7600D96B5E /* mogenerator */,
+				8DD76FA10486AA7600D96B5E /* mogenerator-ctx-debug */,
 				07529615168C552300A33E47 /* CTXAdditionsTests.octest */,
 			);
 			name = Products;
@@ -513,7 +513,7 @@
 			name = mogenerator;
 			productInstallPath = "$(HOME)/bin";
 			productName = mogenerator;
-			productReference = 8DD76FA10486AA7600D96B5E /* mogenerator */;
+			productReference = 8DD76FA10486AA7600D96B5E /* mogenerator-ctx-debug */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -521,6 +521,8 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = 1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "mogenerator" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -795,7 +797,7 @@
 					__info_plist,
 					"/tmp/mogenerator-Info.plist",
 				);
-				PRODUCT_NAME = mogenerator;
+				PRODUCT_NAME = "mogenerator-ctx-debug";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -816,7 +818,7 @@
 					__info_plist,
 					"/tmp/mogenerator-Info.plist",
 				);
-				PRODUCT_NAME = mogenerator;
+				PRODUCT_NAME = "mogenerator-ctx";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
