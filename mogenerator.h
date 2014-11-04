@@ -1,5 +1,5 @@
 // mogenerator.h
-//   Copyright (c) 2006-2013 Jonathan 'Wolf' Rentzsch: http://rentzsch.com
+//   Copyright (c) 2006-2014 Jonathan 'Wolf' Rentzsch: http://rentzsch.com
 //   Some rights reserved: http://opensource.org/licenses/mit
 //   http://github.com/rentzsch/mogenerator
 
@@ -19,10 +19,13 @@
 @end
 
 @interface NSEntityDescription (customBaseClass)
+- (BOOL)hasCustomClass;
 - (BOOL)hasSuperentity;
 - (BOOL)hasCustomSuperentity;
+- (BOOL)hasAdditionalHeaderFile;
 - (NSString*)customSuperentity;
 - (NSString*)forcedCustomBaseClass;
+- (NSString*)additionalHeaderFileName;
 - (void)_processPredicate:(NSPredicate*)predicate_ bindings:(NSMutableArray*)bindings_;
 - (NSArray*)prettyFetchRequests;
 @end
@@ -33,6 +36,8 @@
 - (NSString*)scalarAccessorMethodName;
 - (NSString*)scalarFactoryMethodName;
 - (BOOL)hasDefinedAttributeType;
+- (NSArray*)objectAttributeTransformableProtocols;
+- (BOOL)hasAttributeTransformableProtocols;
 - (NSString*)objectAttributeClassName;
 - (NSString*)objectAttributeType;
 - (BOOL)hasTransformableAttributeType;
@@ -75,6 +80,8 @@
     BOOL                  _version;
     BOOL                  _listSourceFiles;
     BOOL                  _orphaned;
+    BOOL                  _swift;
+    BOOL                  _v2;
     NSMutableDictionary   *templateVar;
 }
 @end

@@ -1,34 +1,55 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to <$managedObjectClassName$>.h instead.
 
-#import <CoreData/CoreData.h>
+<$if TemplateVar.modules$>@import CoreData;<$else$>#import <CoreData/CoreData.h><$endif$>
 <$if hasCustomSuperentity$><$if hasSuperentity$>#import "<$customSuperentity$>.h"
 <$else$><$if hasCustomBaseCaseImport$>#import <$baseClassImport$><$else$>#import "<$customSuperentity$>.h"<$endif$><$endif$><$endif$>
 
+<$if hasAdditionalHeaderFile$>
+#import "<$additionalHeaderFileName$>"
+<$endif$>
+
+<$if noninheritedAttributes.@count > 0$>
 extern const struct <$managedObjectClassName$>Attributes {<$foreach Attribute noninheritedAttributes do$>
 	<$if TemplateVar.arc$>__unsafe_unretained<$endif$> NSString *<$Attribute.name$>;<$endforeach do$>
 } <$managedObjectClassName$>Attributes;
+<$endif$>
 
+<$if noninheritedRelationships.@count > 0$>
 extern const struct <$managedObjectClassName$>Relationships {<$foreach Relationship noninheritedRelationships do$>
 	<$if TemplateVar.arc$>__unsafe_unretained<$endif$> NSString *<$Relationship.name$>;<$endforeach do$>
 } <$managedObjectClassName$>Relationships;
+<$endif$>
 
+<$if noninheritedFetchedProperties.@count > 0$>
 extern const struct <$managedObjectClassName$>FetchedProperties {<$foreach FetchedProperty noninheritedFetchedProperties do$>
 	<$if TemplateVar.arc$>__unsafe_unretained<$endif$> NSString *<$FetchedProperty.name$>;<$endforeach do$>
 } <$managedObjectClassName$>FetchedProperties;
+<$endif$>
+
+<$if hasUserInfoKeys$>
+extern const struct <$managedObjectClassName$>UserInfo {<$foreach UserInfo userInfoKeyValues do$>
+	<$if TemplateVar.arc$>__unsafe_unretained<$endif$> NSString *<$UserInfo.key$>;<$endforeach do$>
+} <$managedObjectClassName$>UserInfo;
+<$endif$>
 
 <$foreach Relationship noninheritedRelationships do$>@class <$Relationship.destinationEntity.managedObjectClassName$>;
 <$endforeach do$>
-<$foreach Attribute noninheritedAttributes do$><$if Attribute.hasTransformableAttributeType$>@class <$Attribute.objectAttributeClassName$>;<$endif$>
+<$foreach Attribute noninheritedAttributes do$>
+<$if Attribute.hasTransformableAttributeType$>
+<$if Attribute.objectAttributeTransformableProtocols$>
+<$foreach Protocol Attribute.objectAttributeTransformableProtocols do$>@protocol <$Protocol$>;
 <$endforeach do$>
-@interface <$managedObjectClassName$>ID : NSManagedObjectID {}
+<$else$>@class <$Attribute.objectAttributeClassName$>;<$endif$><$endif$>
+<$endforeach do$>
+@interface <$managedObjectClassName$>ID : <$if hasSuperentity$><$customSuperentity$>ID<$else$>NSManagedObjectID<$endif$> {}
 @end
 
 @interface _<$managedObjectClassName$> : <$customSuperentity$> {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
-- (<$managedObjectClassName$>ID*)objectID;
+@property (nonatomic, readonly, strong) <$managedObjectClassName$>ID* objectID;
 
 <$foreach Attribute noninheritedAttributes do$>
 <$if Attribute.hasDefinedAttributeType$>
@@ -47,10 +68,10 @@ extern const struct <$managedObjectClassName$>FetchedProperties {<$foreach Fetch
 <$endif$>
 <$if Attribute.hasScalarAttributeType$>
 <$if Attribute.isReadonly$>
-@property (readonly) <$Attribute.scalarAttributeType$> <$Attribute.name$>Value;
+@property (atomic, readonly) <$Attribute.scalarAttributeType$> <$Attribute.name$>Value;
 - (<$Attribute.scalarAttributeType$>)<$Attribute.name$>Value;
 <$else$>
-@property <$Attribute.scalarAttributeType$> <$Attribute.name$>Value;
+@property (atomic) <$Attribute.scalarAttributeType$> <$Attribute.name$>Value;
 - (<$Attribute.scalarAttributeType$>)<$Attribute.name$>Value;
 - (void)set<$Attribute.name.initialCapitalString$>Value:(<$Attribute.scalarAttributeType$>)value_;
 <$endif$>
@@ -101,22 +122,17 @@ extern const struct <$managedObjectClassName$>FetchedProperties {<$foreach Fetch
 <$foreach Relationship noninheritedRelationships do$>
 <$if Relationship.isToMany$>
 @interface _<$managedObjectClassName$> (<$Relationship.name.initialCapitalString$>CoreDataGeneratedAccessors)
-<$if !Relationship.jr_isOrdered$>
 - (void)add<$Relationship.name.initialCapitalString$>:(<$Relationship.immutableCollectionClassName$>*)value_;
 - (void)remove<$Relationship.name.initialCapitalString$>:(<$Relationship.immutableCollectionClassName$>*)value_;
 - (void)add<$Relationship.name.initialCapitalString$>Object:(<$Relationship.destinationEntity.managedObjectClassName$>*)value_;
 - (void)remove<$Relationship.name.initialCapitalString$>Object:(<$Relationship.destinationEntity.managedObjectClassName$>*)value_;
-<$else$>
-- (void)insertObject:(<$Relationship.destinationEntity.managedObjectClassName$>*)value_ in<$Relationship.name.initialCapitalString$>AtIndex:(NSUInteger)index_;
-- (void)removeObjectFrom<$Relationship.name.initialCapitalString$>AtIndex:(NSUInteger)index_;
-- (void)insert<$Relationship.name.initialCapitalString$>:(NSArray*)values_ atIndexes:(NSIndexSet*)indexes_;
-- (void)remove<$Relationship.name.initialCapitalString$>AtIndexes:(NSIndexSet*)indexes_;
-- (void)replaceObjectIn<$Relationship.name.initialCapitalString$>AtIndex:(NSUInteger)index_ withObject:(<$Relationship.destinationEntity.managedObjectClassName$>*)value_;
-- (void)replace<$Relationship.name.initialCapitalString$>AtIndexes:(NSIndexSet*)indexes_ with<$Relationship.name.initialCapitalString$>:(NSArray*)values_;
-- (void)add<$Relationship.name.initialCapitalString$>Object:(<$Relationship.destinationEntity.managedObjectClassName$>*)value_;
-- (void)remove<$Relationship.name.initialCapitalString$>Object:(<$Relationship.destinationEntity.managedObjectClassName$>*)value_;
-- (void)add<$Relationship.name.initialCapitalString$>:(<$Relationship.immutableCollectionClassName$>*)values_;
-- (void)remove<$Relationship.name.initialCapitalString$>:(<$Relationship.immutableCollectionClassName$>*)values_;
+<$if Relationship.isOrdered$>
+- (void)insertObject:(<$Relationship.destinationEntity.managedObjectClassName$>*)value in<$Relationship.name.initialCapitalString$>AtIndex:(NSUInteger)idx;
+- (void)removeObjectFrom<$Relationship.name.initialCapitalString$>AtIndex:(NSUInteger)idx;
+- (void)insert<$Relationship.name.initialCapitalString$>:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
+- (void)remove<$Relationship.name.initialCapitalString$>AtIndexes:(NSIndexSet *)indexes;
+- (void)replaceObjectIn<$Relationship.name.initialCapitalString$>AtIndex:(NSUInteger)idx withObject:(<$Relationship.destinationEntity.managedObjectClassName$>*)value;
+- (void)replace<$Relationship.name.initialCapitalString$>AtIndexes:(NSIndexSet *)indexes with<$Relationship.name.initialCapitalString$>:(NSArray *)values;
 <$endif$>
 @end
 <$endif$>
