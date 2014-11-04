@@ -17,9 +17,10 @@ NSString * const kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOWhenSet_
 
 NSString * const kCTXNSPropertyDescriptionDTOClassName_key = @"com.ef.ctx.mogenerator.dto.className";
 
+NSString * const kCTXNSPropertyDescriptionImmutableEntityClassName_key = @"com.ef.ctx.mogenerator.entity.immutable.className";
+NSString * const kCTXNSPropertyDescriptionMutableEntityClassName_key = @"com.ef.ctx.mogenerator.entity.mutable.className";
 
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
+
 static inline BOOL stringContainsNegativeResponse(NSString *string)
 {
     NSString *normalizedString = [[string lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -27,33 +28,47 @@ static inline BOOL stringContainsNegativeResponse(NSString *string)
             [normalizedString isEqualToString:@"false"]);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 // String which doesn't contain negative response is considered as containing a positive one.
 static inline BOOL stringContainsPositiveResponse(NSString *string)
 {
     return (!stringContainsNegativeResponse(string));
 }
 
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-static NSString *dtoClassNameForManagedObjectClassName(NSString *managedObjectClassName)
+static NSString *normalizedManagedObjectClassName(NSString *managedObjectClassName)
 {
     static NSString * const kMOSuffix = @"MO";
-    static NSString * const kDTOSuffix = @"DTO";
-    
+
     NSString *normalizedManagedObjectClassName = managedObjectClassName;
     BOOL managedObjectClassNameEndsWithMO = [managedObjectClassName hasSuffix:kMOSuffix];
     if (managedObjectClassNameEndsWithMO) {
         NSRange suffixRange = [normalizedManagedObjectClassName rangeOfString:kMOSuffix options:NSBackwardsSearch];
         normalizedManagedObjectClassName = [normalizedManagedObjectClassName stringByReplacingCharactersInRange:suffixRange withString:@""];
     }
-    return [NSString stringWithFormat:@"%@%@", normalizedManagedObjectClassName, kDTOSuffix];
+    return normalizedManagedObjectClassName;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
+static NSString *dtoClassNameForManagedObjectClassName(NSString *managedObjectClassName)
+{
+    return [NSString stringWithFormat:@"%@DTO", normalizedManagedObjectClassName(managedObjectClassName)];
+}
+
+static NSString *immutableEntityClassNameForManagedObjectClassName(NSString *managedObjectClassName)
+{
+    return [NSString stringWithFormat:@"%@ImmutableEntity", normalizedManagedObjectClassName(managedObjectClassName)];
+}
+
+static NSString *mutableEntityClassNameForManagedObjectClassName(NSString *managedObjectClassName)
+{
+    return [NSString stringWithFormat:@"%@MutableEntity", normalizedManagedObjectClassName(managedObjectClassName)];
+}
+
 @implementation NSEntityDescription (CTX)
+
+- (BOOL)CTX_hasCustomSuperEntity {
+    NSEntityDescription *superentity = [self superentity];
+    NSString *managedObjectClassName = ([[superentity managedObjectClassName] length] > 0) ? [superentity managedObjectClassName] : NSStringFromClass([NSManagedObject class]);
+    return (superentity && (![managedObjectClassName isEqualToString:NSStringFromClass([NSManagedObject class])]));
+}
 
 - (NSString *)CTX_dtoClassName
 {
@@ -65,25 +80,50 @@ static NSString *dtoClassNameForManagedObjectClassName(NSString *managedObjectCl
 }
 
 - (NSString *)CTX_dtoSuperclassName {
-    NSEntityDescription *superentity = [self superentity];
-    NSString *managedObjectClassName = ([[superentity managedObjectClassName] length] > 0) ? [superentity managedObjectClassName] : NSStringFromClass([NSManagedObject class]);
-    BOOL superentityIsCustom = (superentity && ([managedObjectClassName isEqualToString:NSStringFromClass([NSManagedObject class])] == NO));
-    if (superentityIsCustom) {
-//        return dtoClassNameForManagedObjectClassName([self customSuperentity]);
-        return [superentity CTX_dtoClassName];
+    if ([self CTX_hasCustomSuperEntity]) {
+        return [[self superentity] CTX_dtoClassName];
+    }
+    return @"NSObject";
+}
+
+- (NSString *)CTX_immutableEntityClassName
+{
+    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionImmutableEntityClassName_key];
+    if (value == nil) {
+        value = immutableEntityClassNameForManagedObjectClassName([self managedObjectClassName]);
+    }
+    return value;
+}
+
+- (NSString *)CTX_immutableEntitySuperclassName {
+    if ([self CTX_hasCustomSuperEntity]) {
+        return [[self superentity] CTX_immutableEntityClassName];
+    }
+    return @"NSObject";
+}
+
+- (NSString *)CTX_mutableEntityClassName
+{
+    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionMutableEntityClassName_key];
+    if (value == nil) {
+        value = mutableEntityClassNameForManagedObjectClassName([self managedObjectClassName]);
+    }
+    return value;
+}
+
+- (NSString *)CTX_mutableEntitySuperclassName {
+    if ([self CTX_hasCustomSuperEntity]) {
+        return [[self superentity] CTX_mutableEntityClassName];
     }
     return @"NSObject";
 }
 
 @end
 
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 @implementation NSPropertyDescription (CTX)
 
 - (BOOL)CTX_shouldBePersistedInDTO
 {
-    
     NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionShouldNotBePersistedInDTO_key];
     if (value != nil) {
         // Method checks for the negative value of User Info's property, because it is intended to be set,
@@ -104,8 +144,6 @@ static NSString *dtoClassNameForManagedObjectClassName(NSString *managedObjectCl
 
 @end
 
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 @implementation NSRelationshipDescription (CTX)
 
 - (BOOL)CTX_shouldBeDeletedWhenUnset
