@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		072004D61684804C002C5620 /* mogenerator+CTX.m in Sources */ = {isa = PBXBuildFile; fileRef = 072004D51684804C002C5620 /* mogenerator+CTX.m */; };
-		07529616168C552300A33E47 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 075295F9168C542A00A33E47 /* SenTestingKit.framework */; };
 		07529618168C552300A33E47 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07529617168C552300A33E47 /* Cocoa.framework */; };
 		07529622168C552300A33E47 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07529620168C552300A33E47 /* InfoPlist.strings */; };
 		07529625168C552300A33E47 /* CTXAdditionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 07529624168C552300A33E47 /* CTXAdditionsTests.m */; };
@@ -121,10 +120,9 @@
 /* Begin PBXFileReference section */
 		072004D41684804C002C5620 /* mogenerator+CTX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mogenerator+CTX.h"; sourceTree = "<group>"; };
 		072004D51684804C002C5620 /* mogenerator+CTX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "mogenerator+CTX.m"; sourceTree = "<group>"; };
-		075295F9168C542A00A33E47 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		075295FB168C542A00A33E47 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		075295FD168C542A00A33E47 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		07529615168C552300A33E47 /* CTXAdditionsTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTXAdditionsTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		07529615168C552300A33E47 /* CTXAdditionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTXAdditionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07529617168C552300A33E47 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0752961A168C552300A33E47 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		0752961B168C552300A33E47 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -250,7 +248,6 @@
 			files = (
 				077F50E3169597DC0096A794 /* Foundation.framework in Frameworks */,
 				077F50E2169597D30096A794 /* libicucore.dylib in Frameworks */,
-				07529616168C552300A33E47 /* SenTestingKit.framework in Frameworks */,
 				07529618168C552300A33E47 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,7 +268,6 @@
 		075295F8168C542A00A33E47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				075295F9168C542A00A33E47 /* SenTestingKit.framework */,
 				075295FB168C542A00A33E47 /* UIKit.framework */,
 				075295FD168C542A00A33E47 /* Foundation.framework */,
 				07529617168C552300A33E47 /* Cocoa.framework */,
@@ -355,7 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				8DD76FA10486AA7600D96B5E /* mogenerator-ctx-debug */,
-				07529615168C552300A33E47 /* CTXAdditionsTests.octest */,
+				07529615168C552300A33E47 /* CTXAdditionsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -495,8 +491,8 @@
 			);
 			name = CTXAdditionsTests;
 			productName = CTXAdditionsTests;
-			productReference = 07529615168C552300A33E47 /* CTXAdditionsTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 07529615168C552300A33E47 /* CTXAdditionsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		8DD76F960486AA7600D96B5E /* mogenerator */ = {
 			isa = PBXNativeTarget;
@@ -723,7 +719,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -744,7 +743,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -762,7 +760,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -775,7 +776,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

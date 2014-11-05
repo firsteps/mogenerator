@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="11G56" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="BaseMOObject" representedClassName="BaseMOObject" syncable="YES"/>
     <entity name="BaseObject" representedClassName="BaseObject" syncable="YES"/>
     <entity name="BaseObjectMO" representedClassName="" syncable="YES"/>
@@ -9,16 +9,24 @@
     <entity name="CustomBaseObject" representedClassName="CustomBaseObject" syncable="YES">
         <userInfo>
             <entry key="com.ef.ctx.mogenerator.dto.className" value="CustomBaseDTOClass"/>
+            <entry key="com.ef.ctx.mogenerator.entity.immutable.className" value="CustomBaseImmutableEntityClass"/>
+            <entry key="com.ef.ctx.mogenerator.entity.mutable.className" value="CustomBaseMutableEntityClass"/>
         </userInfo>
     </entity>
     <entity name="CustomTestObject" representedClassName="CustomTestObject" parentEntity="CustomBaseObject" syncable="YES">
         <userInfo>
             <entry key="com.ef.ctx.mogenerator.dto.className" value="CustomDTOClass"/>
+            <entry key="com.ef.ctx.mogenerator.entity.immutable.className" value="CustomImmutableEntityClass"/>
+            <entry key="com.ef.ctx.mogenerator.entity.mutable.className" value="CustomMutableEntityClass"/>
             <entry key="com.ef.ctx.mogenerator.repository.action.protocolName" value="CustomRepositoryActionProtocol"/>
             <entry key="com.ef.ctx.mogenerator.repository.localDB.className" value="CustomLocalDBRepository"/>
             <entry key="com.ef.ctx.mogenerator.repository.protocolName" value="CustomRepositoryProtocol"/>
             <entry key="com.ef.ctx.mogenerator.repository.remoteWebService.className" value="CustomRemoteWebServiceRepository"/>
         </userInfo>
+    </entity>
+    <entity name="Descendant" representedClassName="Descendant" syncable="YES">
+        <relationship name="privateAncestor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubParent" inverseName="privateDescendant" inverseEntity="SubParent" syncable="YES"/>
+        <relationship name="publicAncestor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubParent" inverseName="publicDescendant" inverseEntity="SubParent" syncable="YES"/>
     </entity>
     <entity name="MOBaseObject" representedClassName="MOBaseObject" syncable="YES"/>
     <entity name="MOTestObject" representedClassName="MOTestObject" parentEntity="MOBaseObject" syncable="YES"/>
@@ -29,6 +37,21 @@
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Child" inverseName="parent" inverseEntity="Child" syncable="YES"/>
         <relationship name="orderedChildren" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="OrderedChild" inverseName="parent" inverseEntity="OrderedChild" syncable="YES"/>
     </entity>
+    <entity name="SubParent" representedClassName="SubParent" parentEntity="Parent" syncable="YES">
+        <attribute name="privateAttribute" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="com.ef.ctx.mogenerator.dto.shouldNotBePersisted" value="value"/>
+            </userInfo>
+        </attribute>
+        <attribute name="publicAttribute" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="privateDescendant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Descendant" inverseName="privateAncestor" inverseEntity="Descendant" syncable="YES">
+            <userInfo>
+                <entry key="com.ef.ctx.mogenerator.dto.shouldNotBePersisted" value="value"/>
+            </userInfo>
+        </relationship>
+        <relationship name="publicDescendant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Descendant" inverseName="publicAncestor" inverseEntity="Descendant" syncable="YES"/>
+    </entity>
+    <entity name="SubParentEmpty" representedClassName="SubParentEmpty" parentEntity="Parent" syncable="YES"/>
     <entity name="TestMOObject" representedClassName="TestMOObject" parentEntity="BaseMOObject" syncable="YES"/>
     <entity name="TestObject" representedClassName="TestObject" syncable="YES"/>
     <entity name="TestObjectMO" representedClassName="TestObjectMO" parentEntity="BaseObjectMO" syncable="YES"/>
@@ -36,15 +59,18 @@
         <element name="BaseMOObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="BaseObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="BaseObjectMO" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="CustomBaseObject" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="CustomTestObject" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="Child" positionX="160" positionY="192" width="128" height="60"/>
+        <element name="CustomBaseObject" positionX="160" positionY="192" width="128" height="43"/>
+        <element name="CustomTestObject" positionX="160" positionY="192" width="128" height="43"/>
         <element name="MOBaseObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="MOTestObject" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="OrderedChild" positionX="160" positionY="192" width="128" height="60"/>
+        <element name="Parent" positionX="160" positionY="192" width="128" height="75"/>
         <element name="TestMOObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestObjectMO" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="Parent" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="OrderedChild" positionX="160" positionY="192" width="128" height="60"/>
-        <element name="Child" positionX="160" positionY="192" width="128" height="60"/>
+        <element name="SubParent" positionX="189" positionY="234" width="128" height="103"/>
+        <element name="Descendant" positionX="198" positionY="270" width="128" height="73"/>
+        <element name="SubParentEmpty" positionX="225" positionY="288" width="128" height="43"/>
     </elements>
 </model>

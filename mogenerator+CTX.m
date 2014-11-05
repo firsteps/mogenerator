@@ -118,6 +118,52 @@ static NSString *mutableEntityClassNameForManagedObjectClassName(NSString *manag
     return @"NSObject";
 }
 
+- (BOOL)CTX_hasNoninheritedAttributes {
+    return ([[self noninheritedAttributes] count] > 0);
+}
+
+- (BOOL)CTX_hasNoninheritedAttributesSansType {
+    return ([[self noninheritedAttributesSansType] count] > 0);
+}
+
+- (BOOL)CTX_hasNoninheritedRelationships {
+    return ([[self noninheritedRelationships] count] > 0);
+}
+
+- (BOOL)CTX_hasNoninheritedFetchedProperties {
+    return ([[self noninheritedFetchedProperties] count] > 0);
+}
+
+- (NSArray *)CTX_noninheritedAttributesPersistingInDTO {
+    NSMutableArray *result = [NSMutableArray array];
+    NSArray *noninheritedAttributes = [self noninheritedAttributes];
+    [noninheritedAttributes enumerateObjectsUsingBlock:^(NSPropertyDescription *attribute, NSUInteger idx, BOOL *stop) {
+        if ([attribute CTX_shouldBePersistedInDTO]) {
+            [result addObject:attribute];
+        }
+    }];
+    return [NSArray arrayWithArray:result];
+}
+
+- (NSArray *)CTX_noninheritedRelationshipsPersistingInDTO {
+    NSMutableArray *result = [NSMutableArray array];
+    NSArray *noninheritedAttributes = [self noninheritedRelationships];
+    [noninheritedAttributes enumerateObjectsUsingBlock:^(NSPropertyDescription *attribute, NSUInteger idx, BOOL *stop) {
+        if ([attribute CTX_shouldBePersistedInDTO]) {
+            [result addObject:attribute];
+        }
+    }];
+    return [NSArray arrayWithArray:result];
+}
+
+- (BOOL)CTX_hasNoninheritedAttributesPersistingInDTO {
+    return ([[self CTX_noninheritedAttributesPersistingInDTO] count] > 0);
+}
+
+- (BOOL)CTX_hasNoninheritedRelationshipsPersistingInDTO {
+    return ([[self CTX_noninheritedRelationshipsPersistingInDTO] count ] > 0);
+}
+
 @end
 
 @implementation NSPropertyDescription (CTX)

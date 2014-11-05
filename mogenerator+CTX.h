@@ -22,8 +22,22 @@ extern NSString * const kCTXNSPropertyDescriptionDTOClassName_key;
 @interface NSEntityDescription (CTX)
 
 - (NSString *)CTX_dtoClassName;
-
 - (NSString *)CTX_dtoSuperclassName;
+- (NSString *)CTX_immutableEntityClassName;
+- (NSString *)CTX_immutableEntitySuperclassName;
+- (NSString *)CTX_mutableEntityClassName;
+- (NSString *)CTX_mutableEntitySuperclassName;
+
+- (BOOL)CTX_hasNoninheritedAttributes;
+- (BOOL)CTX_hasNoninheritedAttributesSansType;
+- (BOOL)CTX_hasNoninheritedRelationships;
+- (BOOL)CTX_hasNoninheritedFetchedProperties;
+
+- (NSArray *)CTX_noninheritedAttributesPersistingInDTO;
+- (NSArray *)CTX_noninheritedRelationshipsPersistingInDTO;
+
+- (BOOL)CTX_hasNoninheritedAttributesPersistingInDTO;
+- (BOOL)CTX_hasNoninheritedRelationshipsPersistingInDTO;
 
 @end
 

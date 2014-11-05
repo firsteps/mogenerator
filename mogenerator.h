@@ -28,6 +28,11 @@
 - (NSString*)additionalHeaderFileName;
 - (void)_processPredicate:(NSPredicate*)predicate_ bindings:(NSMutableArray*)bindings_;
 - (NSArray*)prettyFetchRequests;
+
+- (NSArray*)noninheritedAttributes;
+- (NSArray*)noninheritedAttributesSansType;
+- (NSArray*)noninheritedRelationships;
+- (NSArray*)noninheritedFetchedProperties;
 @end
 
 @interface NSAttributeDescription (typing)
