@@ -59,6 +59,10 @@ extern NSString * const kCTXNSPropertyDescriptionDTOClassName_key;
 
 - (BOOL)CTX_isMandatoryInDTO;
 
+// Marks attributes/relationships to be readonly in both Immutable & Mutable Entities (default value is NO)
+
+- (BOOL)CTX_isReadonlyInEntities;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////

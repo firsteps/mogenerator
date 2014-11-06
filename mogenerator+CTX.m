@@ -20,6 +20,7 @@ NSString * const kCTXNSPropertyDescriptionDTOClassName_key = @"com.ef.ctx.mogene
 NSString * const kCTXNSPropertyDescriptionImmutableEntityClassName_key = @"com.ef.ctx.mogenerator.entity.immutable.className";
 NSString * const kCTXNSPropertyDescriptionMutableEntityClassName_key = @"com.ef.ctx.mogenerator.entity.mutable.className";
 
+NSString * const kCTXNSPropertyDescriptionReadonlyInEntities_key = @"com.ef.ctx.mogenerator.entity.readonly";
 
 static inline BOOL stringContainsNegativeResponse(NSString *string)
 {
@@ -182,6 +183,14 @@ static NSString *mutableEntityClassNameForManagedObjectClassName(NSString *manag
 - (BOOL)CTX_isMandatoryInDTO
 {
     NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionIsMandatoryInDTO_key];
+    if (value != nil) {
+        return stringContainsPositiveResponse(value);
+    }
+    return NO;
+}
+
+- (BOOL)CTX_isReadonlyInEntities {
+    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionReadonlyInEntities_key];
     if (value != nil) {
         return stringContainsPositiveResponse(value);
     }
