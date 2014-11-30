@@ -10,13 +10,6 @@
 #import <CoreData/CoreData.h>
 
 
-extern NSString * const kCTXNSPropertyDescriptionShouldNotBePersistedInDTO_key;
-extern NSString * const kCTXNSPropertyDescriptionIsMandatoryInDTO_key;
-extern NSString * const kCTXNSRelationshipDescriptionShouldNotBeDeletedWhenUnset_key;
-extern NSString * const kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOWhenSet_key;
-
-extern NSString * const kCTXNSPropertyDescriptionDTOClassName_key;
-
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 @interface NSEntityDescription (CTX)
@@ -39,15 +32,24 @@ extern NSString * const kCTXNSPropertyDescriptionDTOClassName_key;
 - (BOOL)CTX_hasNoninheritedAttributesPersistingInDTO;
 - (BOOL)CTX_hasNoninheritedRelationshipsPersistingInDTO;
 
+- (BOOL)CTX_isCore;
+- (NSString *)CTX_coreEntityTypeClassName;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 @interface NSPropertyDescription (CTX)
 
+// Marks attributes/relationships to be exposed in DTOs and Entities (default value is YES)
+//
+// Corresponds the 'com.ef.ctx.mogenerator.property.shouldNotBeExposed' property of User Info dictionary
+
+- (BOOL)CTX_shouldBeExposed;
+
 // Marks attributes/relationships to be persisted in DTOs (default value is YES)
 //
-// Corresponds the 'com.ef.ctx.mogenerator.dto.shouldNotBePersisted' property of User Info dictionary
+// Corresponds the 'CTX_shouldBeExposed
 
 - (BOOL)CTX_shouldBePersistedInDTO;
 
@@ -61,7 +63,7 @@ extern NSString * const kCTXNSPropertyDescriptionDTOClassName_key;
 
 // Marks attributes/relationships to be readonly in both Immutable & Mutable Entities (default value is NO)
 
-- (BOOL)CTX_isReadonlyInEntities;
+- (BOOL)CTX_isReadonlyInEntity;
 
 @end
 

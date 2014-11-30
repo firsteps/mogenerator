@@ -10,7 +10,7 @@
 		072004D61684804C002C5620 /* mogenerator+CTX.m in Sources */ = {isa = PBXBuildFile; fileRef = 072004D51684804C002C5620 /* mogenerator+CTX.m */; };
 		07529618168C552300A33E47 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07529617168C552300A33E47 /* Cocoa.framework */; };
 		07529622168C552300A33E47 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07529620168C552300A33E47 /* InfoPlist.strings */; };
-		07529625168C552300A33E47 /* CTXAdditionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 07529624168C552300A33E47 /* CTXAdditionsTests.m */; };
+		07529625168C552300A33E47 /* CTXAdditionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 07529624168C552300A33E47 /* CTXAdditionsTests.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		0752962A168C554E00A33E47 /* mogenerator+CTX.m in Sources */ = {isa = PBXBuildFile; fileRef = 072004D51684804C002C5620 /* mogenerator+CTX.m */; };
 		0752962F168C574800A33E47 /* TestDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0752962D168C574800A33E47 /* TestDataModel.xcdatamodeld */; };
 		077F50801694B4A70096A794 /* mogenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* mogenerator.m */; };

@@ -10,17 +10,21 @@
 
 #import "mogenerator.h"
 
-NSString * const kCTXNSPropertyDescriptionShouldNotBePersistedInDTO_key = @"com.ef.ctx.mogenerator.dto.shouldNotBePersisted";
-NSString * const kCTXNSPropertyDescriptionIsMandatoryInDTO_key = @"com.ef.ctx.mogenerator.dto.mandatory";
-NSString * const kCTXNSRelationshipDescriptionShouldNotBeDeletedWhenUnset_key = @"com.ef.ctx.mogenerator.mo.shouldNotBeDeletedWhenUnset";
-NSString * const kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOWhenSet_key = @"com.ef.ctx.mogenerator.mo.shouldBeRepopulatedFromDTOWhenSet";
+NSString * const kCTXNSEntityDescriptionDTOClassName_key = @"com.ef.ctx.mogenerator.dto.className";
 
-NSString * const kCTXNSPropertyDescriptionDTOClassName_key = @"com.ef.ctx.mogenerator.dto.className";
+NSString * const kCTXNSEntityDescriptionImmutableEntityClassName_key = @"com.ef.ctx.mogenerator.entity.immutable.className";
+NSString * const kCTXNSEntityDescriptionMutableEntityClassName_key = @"com.ef.ctx.mogenerator.entity.mutable.className";
 
-NSString * const kCTXNSPropertyDescriptionImmutableEntityClassName_key = @"com.ef.ctx.mogenerator.entity.immutable.className";
-NSString * const kCTXNSPropertyDescriptionMutableEntityClassName_key = @"com.ef.ctx.mogenerator.entity.mutable.className";
+NSString * const kCTXNSEntityDescriptionIsCore_key = @"com.ef.ctx.mogenerator.entity.isCore";
+NSString * const kCTXNSEntityDescriptionCoreEntityTypeClassName_key = @"com.ef.ctx.mogenerator.entity.coreEntityType";
 
-NSString * const kCTXNSPropertyDescriptionReadonlyInEntities_key = @"com.ef.ctx.mogenerator.entity.readonly";
+NSString * const kCTXNSPropertyDescriptionShouldNotBeExposed_key = @"com.ef.ctx.mogenerator.property.shouldNotBeExposed";
+
+NSString * const kCTXNSPropertyDescriptionIsMandatoryInDTO_key = @"com.ef.ctx.mogenerator.dto.property.mandatory";
+NSString * const kCTXNSRelationshipDescriptionShouldNotBeDeletedWhenUnset_key = @"com.ef.ctx.mogenerator.mo.relationship.shouldNotBeDeletedWhenUnset";
+NSString * const kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOWhenSet_key = @"com.ef.ctx.mogenerator.mo.relationship.shouldBeRepopulatedFromDTOWhenSet";
+
+NSString * const kCTXNSPropertyDescriptionIsReadonlyInEntity_key = @"com.ef.ctx.mogenerator.entity.property.isReadonly";
 
 static inline BOOL stringContainsNegativeResponse(NSString *string)
 {
@@ -63,6 +67,11 @@ static NSString *mutableEntityClassNameForManagedObjectClassName(NSString *manag
     return [NSString stringWithFormat:@"%@MutableEntity", normalizedManagedObjectClassName(managedObjectClassName)];
 }
 
+static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *managedObjectClassName)
+{
+    return [NSString stringWithFormat:@"%@CoreEntityType", normalizedManagedObjectClassName(managedObjectClassName)];
+}
+
 @implementation NSEntityDescription (CTX)
 
 - (BOOL)CTX_hasCustomSuperEntity {
@@ -73,7 +82,7 @@ static NSString *mutableEntityClassNameForManagedObjectClassName(NSString *manag
 
 - (NSString *)CTX_dtoClassName
 {
-    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionDTOClassName_key];
+    NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionDTOClassName_key];
     if (value == nil) {
         value = dtoClassNameForManagedObjectClassName([self managedObjectClassName]);
     }
@@ -89,7 +98,7 @@ static NSString *mutableEntityClassNameForManagedObjectClassName(NSString *manag
 
 - (NSString *)CTX_immutableEntityClassName
 {
-    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionImmutableEntityClassName_key];
+    NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionImmutableEntityClassName_key];
     if (value == nil) {
         value = immutableEntityClassNameForManagedObjectClassName([self managedObjectClassName]);
     }
@@ -105,7 +114,7 @@ static NSString *mutableEntityClassNameForManagedObjectClassName(NSString *manag
 
 - (NSString *)CTX_mutableEntityClassName
 {
-    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionMutableEntityClassName_key];
+    NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionMutableEntityClassName_key];
     if (value == nil) {
         value = mutableEntityClassNameForManagedObjectClassName([self managedObjectClassName]);
     }
@@ -165,19 +174,40 @@ static NSString *mutableEntityClassNameForManagedObjectClassName(NSString *manag
     return ([[self CTX_noninheritedRelationshipsPersistingInDTO] count ] > 0);
 }
 
+- (NSString *)CTX_coreEntityTypeClassName {
+    NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionCoreEntityTypeClassName_key];
+    if (value == nil) {
+        value = coreEntityTypeClassNameForManagedObjectClassName([self managedObjectClassName]);
+    }
+    return value;
+}
+
+- (BOOL)CTX_isCore {
+    NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionIsCore_key];
+    if (value != nil) {
+        return stringContainsPositiveResponse(value);
+    }
+    return NO;
+}
+
 @end
 
 @implementation NSPropertyDescription (CTX)
 
-- (BOOL)CTX_shouldBePersistedInDTO
+- (BOOL)CTX_shouldBeExposed
 {
-    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionShouldNotBePersistedInDTO_key];
+    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionShouldNotBeExposed_key];
     if (value != nil) {
         // Method checks for the negative value of User Info's property, because it is intended to be set,
         // when user doesn't want property to be persisted in DTO.
         return stringContainsNegativeResponse(value);
     }
     return YES;
+}
+
+- (BOOL)CTX_shouldBePersistedInDTO
+{
+    return [self CTX_shouldBeExposed];
 }
 
 - (BOOL)CTX_isMandatoryInDTO
@@ -189,8 +219,8 @@ static NSString *mutableEntityClassNameForManagedObjectClassName(NSString *manag
     return NO;
 }
 
-- (BOOL)CTX_isReadonlyInEntities {
-    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionReadonlyInEntities_key];
+- (BOOL)CTX_isReadonlyInEntity {
+    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionIsReadonlyInEntity_key];
     if (value != nil) {
         return stringContainsPositiveResponse(value);
     }

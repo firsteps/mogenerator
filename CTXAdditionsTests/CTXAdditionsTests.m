@@ -28,13 +28,12 @@
 {
     // Tear-down code here.
     
-    [_model release];
     _model = nil;
     
     [super tearDown];
 }
 
-- (void)test_010_NSEntityDescription_dtoClassNameIsGeneratedCorrectly
+- (void)test_NSEntityDescription_dtoClassNameIsGeneratedCorrectly
 {
     NSString *const kAssertMessage = @"DTO class name is incorrect";
     
@@ -56,7 +55,7 @@
     XCTAssertEqualObjects(@"CustomDTOClass", [entity CTX_dtoClassName], @"%@", kAssertMessage);
 }
 
-- (void)test_012_NSEntityDescription_dtoSuperclassNameIsGeneratedCorrectly
+- (void)test_NSEntityDescription_dtoSuperclassNameIsGeneratedCorrectly
 {
     NSString *const kAssertMessage = @"DTO superclass name is incorrect";
 
@@ -78,7 +77,7 @@
     XCTAssertEqualObjects(@"CustomBaseDTOClass", [entity CTX_dtoSuperclassName], @"%@", kAssertMessage);
 }
 
-- (void)test_014_NSEntityDescription_immutableEntityClassNameIsGeneratedCorrectly
+- (void)test_NSEntityDescription_immutableEntityClassNameIsGeneratedCorrectly
 {
     NSString *const kAssertMessage = @"Immutable Entity class name is incorrect";
 
@@ -100,7 +99,7 @@
     XCTAssertEqualObjects(@"CustomImmutableEntityClass", [entity CTX_immutableEntityClassName], @"%@", kAssertMessage);
 }
 
-- (void)test_016_NSEntityDescription_immutableEntitySuperclassNameIsGeneratedCorrectly
+- (void)test_NSEntityDescription_immutableEntitySuperclassNameIsGeneratedCorrectly
 {
     NSString *const kAssertMessage = @"Immutable Entity superclass name is incorrect";
 
@@ -122,7 +121,7 @@
     XCTAssertEqualObjects(@"CustomBaseImmutableEntityClass", [entity CTX_immutableEntitySuperclassName], @"%@", kAssertMessage);
 }
 
-- (void)test_018_NSEntityDescription_mutableEntityClassNameIsGeneratedCorrectly
+- (void)test_NSEntityDescription_mutableEntityClassNameIsGeneratedCorrectly
 {
     NSString *const kAssertMessage = @"Mutable Entity class name is incorrect";
 
@@ -144,7 +143,7 @@
     XCTAssertEqualObjects(@"CustomMutableEntityClass", [entity CTX_mutableEntityClassName], @"%@", kAssertMessage);
 }
 
-- (void)test_020_NSEntityDescription_mutableEntitySuperclassNameIsGeneratedCorrectly
+- (void)test_NSEntityDescription_mutableEntitySuperclassNameIsGeneratedCorrectly
 {
     NSString *const kAssertMessage = @"Mutable Entity superclass name is incorrect";
 
@@ -166,151 +165,247 @@
     XCTAssertEqualObjects(@"CustomBaseMutableEntityClass", [entity CTX_mutableEntitySuperclassName], @"%@", kAssertMessage);
 }
 
-- (void)test_030_NSPropertyDescription_shouldBePersistedInDTO
+- (void)test_NSPropertyDescription_shouldBeExposedAndPersistedInDTO
 {
-    NSString *const kAssertMessage = @"[NSPropertyDescription CTX_shouldBePersistedInDTO] is broken";
+    NSString *const userInfokey = @"com.ef.ctx.mogenerator.property.shouldNotBeExposed";
+    
+    NSString *const kAssertMessage = @"[NSPropertyDescription CTX_shouldBeExposed] & [NSPropertyDescription CTX_shouldBePersistedInDTO] are broken";
     
     NSPropertyDescription *property = [[NSPropertyDescription alloc] init];
-
+    XCTAssertTrue([property CTX_shouldBeExposed], @"%@", kAssertMessage);
     XCTAssertTrue([property CTX_shouldBePersistedInDTO], @"%@", kAssertMessage);
 
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.shouldNotBePersisted" : @"NO"}];
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfokey : @"NO"}];
+    XCTAssertTrue([property CTX_shouldBeExposed], @"%@", kAssertMessage);
     XCTAssertTrue([property CTX_shouldBePersistedInDTO], @"%@", kAssertMessage);
     
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.shouldNotBePersisted" : @"no"}];
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfokey : @"no"}];
+    XCTAssertTrue([property CTX_shouldBeExposed], @"%@", kAssertMessage);
     XCTAssertTrue([property CTX_shouldBePersistedInDTO], @"%@", kAssertMessage);
     
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.shouldNotBePersisted" : @"false"}];
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfokey : @"false"}];
+    XCTAssertTrue([property CTX_shouldBeExposed], @"%@", kAssertMessage);
     XCTAssertTrue([property CTX_shouldBePersistedInDTO], @"%@", kAssertMessage);
     
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.shouldNotBePersisted" : @"FALSE"}];
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfokey : @"FALSE"}];
+    XCTAssertTrue([property CTX_shouldBeExposed], @"%@", kAssertMessage);
     XCTAssertTrue([property CTX_shouldBePersistedInDTO], @"%@", kAssertMessage);
     
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.shouldNotBePersisted" : @" FaLSe    "}];
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfokey : @" FaLSe    "}];
+    XCTAssertTrue([property CTX_shouldBeExposed], @"%@", kAssertMessage);
     XCTAssertTrue([property CTX_shouldBePersistedInDTO], @"%@", kAssertMessage);
 
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.shouldNotBePersisted" : @""}];
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfokey : @""}];
+    XCTAssertFalse([property CTX_shouldBeExposed], @"%@", kAssertMessage);
     XCTAssertFalse([property CTX_shouldBePersistedInDTO], @"%@", kAssertMessage);
 
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.shouldNotBePersisted" : @"YES"}];
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfokey : @"YES"}];
+    XCTAssertFalse([property CTX_shouldBeExposed], @"%@", kAssertMessage);
     XCTAssertFalse([property CTX_shouldBePersistedInDTO], @"%@", kAssertMessage);
     
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.shouldNotBePersisted" : @"NO false"}];
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfokey : @"NO false"}];
+    XCTAssertFalse([property CTX_shouldBeExposed], @"%@", kAssertMessage);
     XCTAssertFalse([property CTX_shouldBePersistedInDTO], @"%@", kAssertMessage);
 
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.shouldNotBePersisted" : @"Just any string here bla-bla"}];
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfokey : @"Just any string here bla-bla"}];
+    XCTAssertFalse([property CTX_shouldBeExposed], @"%@", kAssertMessage);
     XCTAssertFalse([property CTX_shouldBePersistedInDTO], @"%@", kAssertMessage);
 }
 
-- (void)test_040_NSPropertyDescription_isMandatoryInDTO
+- (void)test_NSPropertyDescription_isMandatoryInDTO
 {    
+    NSString *const userInfoKey = @"com.ef.ctx.mogenerator.dto.property.mandatory";
+
     NSString *const kAssertMessage = @"[NSPropertyDescription CTX_isMandatoryInDTO] is broken";
     
     NSPropertyDescription *property = [[NSPropertyDescription alloc] init];
+    XCTAssertFalse([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
+    
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfoKey : @"NO"}];
+    XCTAssertFalse([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
+    
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfoKey : @"no"}];
+    XCTAssertFalse([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
+    
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfoKey : @"false"}];
+    XCTAssertFalse([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
+    
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfoKey : @"FALSE"}];
+    XCTAssertFalse([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
+    
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfoKey : @"  fALSe  "}];
+    XCTAssertFalse([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
 
-    XCTAssertFalse([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
-    
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.mandatory" : @"NO"}];
-    XCTAssertFalse([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
-    
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.mandatory" : @"no"}];
-    XCTAssertFalse([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
-    
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.mandatory" : @"false"}];
-    XCTAssertFalse([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
-    
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.mandatory" : @"FALSE"}];
-    XCTAssertFalse([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
-    
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.mandatory" : @"  fALSe  "}];
-    XCTAssertFalse([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
-
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.mandatory" : @""}];
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfoKey : @""}];
     XCTAssertTrue([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
     
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.mandatory" : @"YES"}];
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfoKey : @"YES"}];
     XCTAssertTrue([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
     
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.mandatory" : @"No FalSe"}];
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfoKey : @"No FalSe"}];
     XCTAssertTrue([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
     
-    [property setUserInfo:@{@"com.ef.ctx.mogenerator.dto.mandatory" : @"Just any STRING..."}];
+    property = [[NSPropertyDescription alloc] init];
+    [property setUserInfo:@{userInfoKey : @"Just any STRING..."}];
     XCTAssertTrue([property CTX_isMandatoryInDTO], @"%@", kAssertMessage);
 }
 
-- (void)test_050_NSRelationshipDescription_shouldBeDeletedWhenUnset
+- (void)test_NSRelationshipDescription_shouldBeDeletedWhenUnset
 {
+    NSString *const userInfoKey = @"com.ef.ctx.mogenerator.mo.property.shouldNotBeDeletedWhenUnset";
+    
     NSString *const kAssertMessage = @"[NSRelationshipDescription CTX_shouldBeDeletedWhenUnset] is broken";
     
     NSRelationshipDescription *relationship = [[NSRelationshipDescription alloc] init];
-    
     XCTAssertTrue([relationship CTX_shouldBeDeletedWhenUnset], @"%@", kAssertMessage);
 
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldNotBeDeletedWhenUnset" : @"NO"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"NO"}];
     XCTAssertTrue([relationship CTX_shouldBeDeletedWhenUnset], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldNotBeDeletedWhenUnset" : @"no"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"no"}];
     XCTAssertTrue([relationship CTX_shouldBeDeletedWhenUnset], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldNotBeDeletedWhenUnset" : @"FALSE"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"FALSE"}];
     XCTAssertTrue([relationship CTX_shouldBeDeletedWhenUnset], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldNotBeDeletedWhenUnset" : @"false"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"false"}];
     XCTAssertTrue([relationship CTX_shouldBeDeletedWhenUnset], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldNotBeDeletedWhenUnset" : @"  FAlSe        "}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"  FAlSe        "}];
     XCTAssertTrue([relationship CTX_shouldBeDeletedWhenUnset], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldNotBeDeletedWhenUnset" : @""}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @""}];
     XCTAssertFalse([relationship CTX_shouldBeDeletedWhenUnset], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldNotBeDeletedWhenUnset" : @"YES"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"YES"}];
     XCTAssertFalse([relationship CTX_shouldBeDeletedWhenUnset], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldNotBeDeletedWhenUnset" : @"NO FALSE"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"NO FALSE"}];
     XCTAssertFalse([relationship CTX_shouldBeDeletedWhenUnset], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldNotBeDeletedWhenUnset" : @"Just any string. Any!!!!1!!111"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"Just any string. Any!!!!1!!111"}];
     XCTAssertFalse([relationship CTX_shouldBeDeletedWhenUnset], @"%@", kAssertMessage);
 }
 
-- (void)test_060_NSRelationshipDescription_shouldBeRepopulatedFromDTOWhenSet
+- (void)test_NSRelationshipDescription_shouldBeRepopulatedFromDTOWhenSet
 {
+    NSString *const userInfoKey = @"com.ef.ctx.mogenerator.mo.property.shouldBeRepopulatedFromDTOWhenSet";
+    
     NSString *const kAssertMessage = @"[NSRelationshipDescription CTX_shouldBeRepopulatedFromDTOWhenSet] is broken";
 
     NSRelationshipDescription *relationship = [[NSRelationshipDescription alloc] init];
-    
     XCTAssertFalse([relationship CTX_shouldBeRepopulatedFromDTOWhenSet], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldBeRepopulatedFromDTOWhenSet" : @"NO"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"NO"}];
     XCTAssertFalse([relationship CTX_shouldBeRepopulatedFromDTOWhenSet], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldBeRepopulatedFromDTOWhenSet" : @"no"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"no"}];
     XCTAssertFalse([relationship CTX_shouldBeRepopulatedFromDTOWhenSet], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldBeRepopulatedFromDTOWhenSet" : @"FALSE"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"FALSE"}];
     XCTAssertFalse([relationship CTX_shouldBeRepopulatedFromDTOWhenSet], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldBeRepopulatedFromDTOWhenSet" : @"false"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"false"}];
     XCTAssertFalse([relationship CTX_shouldBeRepopulatedFromDTOWhenSet], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldBeRepopulatedFromDTOWhenSet" : @"  FAlSe        "}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"  FAlSe        "}];
     XCTAssertFalse([relationship CTX_shouldBeRepopulatedFromDTOWhenSet], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldBeRepopulatedFromDTOWhenSet" : @""}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @""}];
     XCTAssertTrue([relationship CTX_shouldBeRepopulatedFromDTOWhenSet], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldBeRepopulatedFromDTOWhenSet" : @"YES"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"YES"}];
     XCTAssertTrue([relationship CTX_shouldBeRepopulatedFromDTOWhenSet], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldBeRepopulatedFromDTOWhenSet" : @"NO FALSE"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"NO FALSE"}];
     XCTAssertTrue([relationship CTX_shouldBeRepopulatedFromDTOWhenSet], @"%@", kAssertMessage);
     
-    [relationship setUserInfo:@{@"com.ef.ctx.mogenerator.mo.shouldBeRepopulatedFromDTOWhenSet" : @"Just any string. Any!!!!1!!111"}];
+    relationship = [[NSRelationshipDescription alloc] init];
+    [relationship setUserInfo:@{userInfoKey : @"Just any string. Any!!!!1!!111"}];
     XCTAssertTrue([relationship CTX_shouldBeRepopulatedFromDTOWhenSet], @"%@", kAssertMessage);
 }
 
-- (void)test_070_NSEntityDescription_attributesPersistingInDTO
+- (void)test_NSEntityDescription_isCore
+{
+    NSString *const userInfoKey = @"com.ef.ctx.mogenerator.entity.isCore";
+    
+    NSString *const kAssertMessage = @"[NSRelationshipDescription CTX_shouldBeRepopulatedFromDTOWhenSet] is broken";
+    
+    NSEntityDescription *entityDescription = [[NSEntityDescription alloc] init];
+    XCTAssertFalse([entityDescription CTX_isCore], @"%@", kAssertMessage);
+    
+    entityDescription = [[NSEntityDescription alloc] init];
+    [entityDescription setUserInfo:@{userInfoKey : @"NO"}];
+    XCTAssertFalse([entityDescription CTX_isCore], @"%@", kAssertMessage);
+    
+    entityDescription = [[NSEntityDescription alloc] init];
+    [entityDescription setUserInfo:@{userInfoKey : @"no"}];
+    XCTAssertFalse([entityDescription CTX_isCore], @"%@", kAssertMessage);
+    
+    entityDescription = [[NSEntityDescription alloc] init];
+    [entityDescription setUserInfo:@{userInfoKey : @"FALSE"}];
+    XCTAssertFalse([entityDescription CTX_isCore], @"%@", kAssertMessage);
+    
+    entityDescription = [[NSEntityDescription alloc] init];
+    [entityDescription setUserInfo:@{userInfoKey : @"false"}];
+    XCTAssertFalse([entityDescription CTX_isCore], @"%@", kAssertMessage);
+    
+    entityDescription = [[NSEntityDescription alloc] init];
+    [entityDescription setUserInfo:@{userInfoKey : @"  FAlSe        "}];
+    XCTAssertFalse([entityDescription CTX_isCore], @"%@", kAssertMessage);
+    
+    entityDescription = [[NSEntityDescription alloc] init];
+    [entityDescription setUserInfo:@{userInfoKey : @""}];
+    XCTAssertTrue([entityDescription CTX_isCore], @"%@", kAssertMessage);
+    
+    entityDescription = [[NSEntityDescription alloc] init];
+    [entityDescription setUserInfo:@{userInfoKey : @"YES"}];
+    XCTAssertTrue([entityDescription CTX_isCore], @"%@", kAssertMessage);
+    
+    entityDescription = [[NSEntityDescription alloc] init];
+    [entityDescription setUserInfo:@{userInfoKey : @"NO FALSE"}];
+    XCTAssertTrue([entityDescription CTX_isCore], @"%@", kAssertMessage);
+    
+    entityDescription = [[NSEntityDescription alloc] init];
+    [entityDescription setUserInfo:@{userInfoKey : @"Just any string. Any!!!!1!!111"}];
+    XCTAssertTrue([entityDescription CTX_isCore], @"%@", kAssertMessage);
+}
+
+- (void)test_NSEntityDescription_attributesPersistingInDTO
 {
     NSEntityDescription *entity = nil;
 
@@ -330,7 +425,7 @@
     XCTAssertFalse([entity CTX_hasNoninheritedAttributesPersistingInDTO], @"Entity has no attributes which are being persisted in DTO");
 }
 
-- (void)test_072_NSEntityDescription_relationshipsPersistingInDTO
+- (void)test_NSEntityDescription_relationshipsPersistingInDTO
 {
     NSEntityDescription *entity = nil;
 

@@ -40,13 +40,13 @@
     <entity name="SubParent" representedClassName="SubParent" parentEntity="Parent" syncable="YES">
         <attribute name="privateAttribute" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
-                <entry key="com.ef.ctx.mogenerator.dto.shouldNotBePersisted" value="value"/>
+                <entry key="com.ef.ctx.mogenerator.property.shouldNotBeExposed" value="value"/>
             </userInfo>
         </attribute>
         <attribute name="publicAttribute" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="privateDescendant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Descendant" inverseName="privateAncestor" inverseEntity="Descendant" syncable="YES">
             <userInfo>
-                <entry key="com.ef.ctx.mogenerator.dto.shouldNotBePersisted" value="value"/>
+                <entry key="com.ef.ctx.mogenerator.property.shouldNotBeExposed" value="value"/>
             </userInfo>
         </relationship>
         <relationship name="publicDescendant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Descendant" inverseName="publicAncestor" inverseEntity="Descendant" syncable="YES"/>
@@ -60,17 +60,17 @@
         <element name="BaseObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="BaseObjectMO" positionX="160" positionY="192" width="128" height="45"/>
         <element name="Child" positionX="160" positionY="192" width="128" height="60"/>
-        <element name="CustomBaseObject" positionX="160" positionY="192" width="128" height="43"/>
-        <element name="CustomTestObject" positionX="160" positionY="192" width="128" height="43"/>
+        <element name="CustomBaseObject" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="CustomTestObject" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="Descendant" positionX="198" positionY="270" width="128" height="73"/>
         <element name="MOBaseObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="MOTestObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="OrderedChild" positionX="160" positionY="192" width="128" height="60"/>
         <element name="Parent" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="SubParent" positionX="189" positionY="234" width="128" height="105"/>
+        <element name="SubParentEmpty" positionX="225" positionY="288" width="128" height="45"/>
         <element name="TestMOObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestObjectMO" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="SubParent" positionX="189" positionY="234" width="128" height="103"/>
-        <element name="Descendant" positionX="198" positionY="270" width="128" height="73"/>
-        <element name="SubParentEmpty" positionX="225" positionY="288" width="128" height="43"/>
     </elements>
 </model>
