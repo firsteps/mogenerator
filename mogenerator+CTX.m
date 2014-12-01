@@ -147,9 +147,9 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
 - (NSArray *)CTX_noninheritedAttributesPersistingInDTO {
     NSMutableArray *result = [NSMutableArray array];
     NSArray *noninheritedAttributes = [self noninheritedAttributes];
-    [noninheritedAttributes enumerateObjectsUsingBlock:^(NSPropertyDescription *attribute, NSUInteger idx, BOOL *stop) {
-        if ([attribute CTX_shouldBePersistedInDTO]) {
-            [result addObject:attribute];
+    [noninheritedAttributes enumerateObjectsUsingBlock:^(NSPropertyDescription *property, NSUInteger idx, BOOL *stop) {
+        if ([property CTX_shouldBePersistedInDTO]) {
+            [result addObject:property];
         }
     }];
     return [NSArray arrayWithArray:result];
@@ -157,10 +157,10 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
 
 - (NSArray *)CTX_noninheritedRelationshipsPersistingInDTO {
     NSMutableArray *result = [NSMutableArray array];
-    NSArray *noninheritedAttributes = [self noninheritedRelationships];
-    [noninheritedAttributes enumerateObjectsUsingBlock:^(NSPropertyDescription *attribute, NSUInteger idx, BOOL *stop) {
-        if ([attribute CTX_shouldBePersistedInDTO]) {
-            [result addObject:attribute];
+    NSArray *noninheritedRelationships = [self noninheritedRelationships];
+    [noninheritedRelationships enumerateObjectsUsingBlock:^(NSPropertyDescription *property, NSUInteger idx, BOOL *stop) {
+        if ([property CTX_shouldBePersistedInDTO]) {
+            [result addObject:property];
         }
     }];
     return [NSArray arrayWithArray:result];
@@ -172,6 +172,36 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
 
 - (BOOL)CTX_hasNoninheritedRelationshipsPersistingInDTO {
     return ([[self CTX_noninheritedRelationshipsPersistingInDTO] count ] > 0);
+}
+
+- (NSArray *)CTX_noninheritedExposedAttributes {
+    NSMutableArray *result = [NSMutableArray array];
+    NSArray *noninheritedAttributes = [self noninheritedAttributes];
+    [noninheritedAttributes enumerateObjectsUsingBlock:^(NSPropertyDescription *property, NSUInteger idx, BOOL *stop) {
+        if ([property CTX_shouldBeExposed]) {
+            [result addObject:property];
+        }
+    }];
+    return [NSArray arrayWithArray:result];
+}
+
+- (NSArray *)CTX_noninheritedExposedRelationships {
+    NSMutableArray *result = [NSMutableArray array];
+    NSArray *noninheritedRelationships = [self noninheritedRelationships];
+    [noninheritedRelationships enumerateObjectsUsingBlock:^(NSPropertyDescription *property, NSUInteger idx, BOOL *stop) {
+        if ([property CTX_shouldBeExposed]) {
+            [result addObject:property];
+        }
+    }];
+    return [NSArray arrayWithArray:result];
+}
+
+- (BOOL)CTX_hasNoninheritedExposedAttributes {
+    return ([[self CTX_noninheritedExposedAttributes] count] > 0);
+}
+
+- (BOOL)CTX_hasNoninheritedExposedRelationships {
+    return ([[self CTX_noninheritedExposedRelationships] count ] > 0);
 }
 
 - (NSString *)CTX_coreEntityTypeClassName {

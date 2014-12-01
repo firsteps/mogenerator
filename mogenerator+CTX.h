@@ -32,6 +32,12 @@
 - (BOOL)CTX_hasNoninheritedAttributesPersistingInDTO;
 - (BOOL)CTX_hasNoninheritedRelationshipsPersistingInDTO;
 
+- (NSArray *)CTX_noninheritedExposedAttributes;
+- (NSArray *)CTX_noninheritedExposedRelationships;
+
+- (BOOL)CTX_hasNoninheritedExposedAttributes;
+- (BOOL)CTX_hasNoninheritedExposedRelationships;
+
 - (BOOL)CTX_isCore;
 - (NSString *)CTX_coreEntityTypeClassName;
 
