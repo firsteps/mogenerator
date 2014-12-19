@@ -220,12 +220,17 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
     return NO;
 }
 
+- (NSArray *)CTX_hasSubentities
+{
+    return ([[self subentities] count] > 0);
+}
+
 - (NSArray *)CTX_finalSubentities
 {
     NSMutableArray *list = [NSMutableArray array];
     
     [self.subentities enumerateObjectsUsingBlock:^(NSEntityDescription *entity, NSUInteger idx, BOOL *stop) {
-        if ([[entity subentities] count] == 0) {
+        if (![entity CTX_hasSubentities]) {
             [list addObject:entity];
         } else {
             [list addObjectsFromArray:[entity CTX_finalSubentities]];
