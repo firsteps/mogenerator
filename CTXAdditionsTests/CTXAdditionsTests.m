@@ -450,29 +450,37 @@
     NSString *entityName = @"VehicleAbstract";
     NSEntityDescription *entity = [[_model entitiesByName] objectForKey:entityName];
     
+    XCTAssertTrue([entity CTX_hasSubentities], @"%@ has subentities", entityName);
+    
     NSArray *finalSubentities = [entity CTX_finalSubentities];
     
     XCTAssertTrue([finalSubentities count] == 4, @"A wrong number of final Subentities");
 
     entityName = @"VehicleShip";
     entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_hasSubentities], @"%@ has subentities", entityName);
     XCTAssertNotEqual([finalSubentities indexOfObject:entity], NSNotFound, @"Subentities list should contain '%@' entity", entityName);
 
     entityName = @"VehiclePlane";
     entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_hasSubentities], @"%@ has subentities", entityName);
     XCTAssertNotEqual([finalSubentities indexOfObject:entity], NSNotFound, @"Subentities list should contain '%@' entity", entityName);
     
     entityName = @"VehicleCarSport";
     entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_hasSubentities], @"%@ has subentities", entityName);
     XCTAssertNotEqual([finalSubentities indexOfObject:entity], NSNotFound, @"Subentities list should contain '%@' entity", entityName);
     
     entityName = @"VehicleCarTruck";
     entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_hasSubentities], @"%@ has subentities", entityName);
     XCTAssertNotEqual([finalSubentities indexOfObject:entity], NSNotFound, @"Subentities list should contain '%@' entity", entityName);
     
     entityName = @"VehicleCar";
     entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertTrue([entity CTX_hasSubentities], @"%@ has subentities", entityName);
     XCTAssertEqual([finalSubentities indexOfObject:entity], NSNotFound, @"Subentities list should contain '%@' abstract entity", entityName);
+    
 }
 
 @end

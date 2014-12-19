@@ -220,7 +220,7 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
     return NO;
 }
 
-- (NSArray *)CTX_hasSubentities
+- (BOOL)CTX_hasSubentities
 {
     return ([[self subentities] count] > 0);
 }
