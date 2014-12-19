@@ -220,6 +220,21 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
     return NO;
 }
 
+- (NSArray *)CTX_finalSubentities
+{
+    NSMutableArray *list = [NSMutableArray array];
+    
+    [self.subentities enumerateObjectsUsingBlock:^(NSEntityDescription *entity, NSUInteger idx, BOOL *stop) {
+        if ([[entity subentities] count] == 0) {
+            [list addObject:entity];
+        } else {
+            [list addObjectsFromArray:[entity CTX_finalSubentities]];
+        }
+    }];
+    
+    return [list copy];
+}
+
 @end
 
 @implementation NSPropertyDescription (CTX)

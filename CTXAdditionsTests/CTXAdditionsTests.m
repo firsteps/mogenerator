@@ -269,7 +269,7 @@
 
 - (void)test_NSRelationshipDescription_shouldBeDeletedWhenUnset
 {
-    NSString *const userInfoKey = @"com.ef.ctx.mogenerator.mo.property.shouldNotBeDeletedWhenUnset";
+    NSString *const userInfoKey = @"com.ef.ctx.mogenerator.mo.relationship.shouldNotBeDeletedWhenUnset";
     
     NSString *const kAssertMessage = @"[NSRelationshipDescription CTX_shouldBeDeletedWhenUnset] is broken";
     
@@ -315,7 +315,7 @@
 
 - (void)test_NSRelationshipDescription_shouldBeRepopulatedFromDTOWhenSet
 {
-    NSString *const userInfoKey = @"com.ef.ctx.mogenerator.mo.property.shouldBeRepopulatedFromDTOWhenSet";
+    NSString *const userInfoKey = @"com.ef.ctx.mogenerator.mo.relationship.shouldBeRepopulatedFromDTOWhenSet";
     
     NSString *const kAssertMessage = @"[NSRelationshipDescription CTX_shouldBeRepopulatedFromDTOWhenSet] is broken";
 
@@ -443,6 +443,36 @@
 
     XCTAssertTrue([[entity CTX_noninheritedRelationshipsPersistingInDTO] count] == 0, @"A wrong number of relationships which are being persisted in DTO");
     XCTAssertFalse([entity CTX_hasNoninheritedRelationshipsPersistingInDTO], @"Entity has no relationships which are being persisted in DTO");
+}
+
+- (void)test_NSEntityDescription_finalSubentities
+{
+    NSString *entityName = @"VehicleAbstract";
+    NSEntityDescription *entity = [[_model entitiesByName] objectForKey:entityName];
+    
+    NSArray *finalSubentities = [entity CTX_finalSubentities];
+    
+    XCTAssertTrue([finalSubentities count] == 4, @"A wrong number of final Subentities");
+
+    entityName = @"VehicleShip";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertNotEqual([finalSubentities indexOfObject:entity], NSNotFound, @"Subentities list should contain '%@' entity", entityName);
+
+    entityName = @"VehiclePlane";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertNotEqual([finalSubentities indexOfObject:entity], NSNotFound, @"Subentities list should contain '%@' entity", entityName);
+    
+    entityName = @"VehicleCarSport";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertNotEqual([finalSubentities indexOfObject:entity], NSNotFound, @"Subentities list should contain '%@' entity", entityName);
+    
+    entityName = @"VehicleCarTruck";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertNotEqual([finalSubentities indexOfObject:entity], NSNotFound, @"Subentities list should contain '%@' entity", entityName);
+    
+    entityName = @"VehicleCar";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertEqual([finalSubentities indexOfObject:entity], NSNotFound, @"Subentities list should contain '%@' abstract entity", entityName);
 }
 
 @end

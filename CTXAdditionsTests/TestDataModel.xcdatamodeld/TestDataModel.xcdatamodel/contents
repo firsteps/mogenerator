@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="BaseMOObject" representedClassName="BaseMOObject" syncable="YES"/>
     <entity name="BaseObject" representedClassName="BaseObject" syncable="YES"/>
     <entity name="BaseObjectMO" representedClassName="" syncable="YES"/>
@@ -55,6 +55,12 @@
     <entity name="TestMOObject" representedClassName="TestMOObject" parentEntity="BaseMOObject" syncable="YES"/>
     <entity name="TestObject" representedClassName="TestObject" syncable="YES"/>
     <entity name="TestObjectMO" representedClassName="TestObjectMO" parentEntity="BaseObjectMO" syncable="YES"/>
+    <entity name="VehicleAbstract" representedClassName="VehicleAbstract" isAbstract="YES" syncable="YES"/>
+    <entity name="VehicleCar" representedClassName="VehicleCar" isAbstract="YES" parentEntity="VehicleAbstract" syncable="YES"/>
+    <entity name="VehicleCarSport" representedClassName="VehicleCarSport" parentEntity="VehicleCar" syncable="YES"/>
+    <entity name="VehicleCarTruck" representedClassName="VehicleCarTruck" parentEntity="VehicleCar" syncable="YES"/>
+    <entity name="VehiclePlane" representedClassName="VehiclePlane" parentEntity="VehicleAbstract" syncable="YES"/>
+    <entity name="VehicleShip" representedClassName="VehicleShip" parentEntity="VehicleAbstract" syncable="YES"/>
     <elements>
         <element name="BaseMOObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="BaseObject" positionX="160" positionY="192" width="128" height="45"/>
@@ -72,5 +78,11 @@
         <element name="TestMOObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestObject" positionX="160" positionY="192" width="128" height="45"/>
         <element name="TestObjectMO" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="VehicleAbstract" positionX="189" positionY="252" width="128" height="43"/>
+        <element name="VehicleShip" positionX="198" positionY="261" width="128" height="43"/>
+        <element name="VehiclePlane" positionX="207" positionY="270" width="128" height="45"/>
+        <element name="VehicleCar" positionX="216" positionY="279" width="128" height="45"/>
+        <element name="VehicleCarSport" positionX="225" positionY="288" width="128" height="45"/>
+        <element name="VehicleCarTruck" positionX="234" positionY="297" width="128" height="45"/>
     </elements>
 </model>
