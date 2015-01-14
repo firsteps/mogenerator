@@ -25,6 +25,7 @@ NSString * const kCTXNSRelationshipDescriptionShouldNotBeDeletedWhenUnset_key = 
 NSString * const kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOWhenSet_key = @"com.ef.ctx.mogenerator.mo.relationship.shouldBeRepopulatedFromDTOWhenSet";
 
 NSString * const kCTXNSPropertyDescriptionIsReadonlyInEntity_key = @"com.ef.ctx.mogenerator.entity.property.isReadonly";
+NSString * const kCTXNSPropertyDescriptionIsIdentifierInEntity_key = @"com.ef.ctx.mogenerator.entity.property.isIdentifier";
 
 static inline BOOL stringContainsNegativeResponse(NSString *string)
 {
@@ -240,6 +241,23 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
     return [list copy];
 }
 
+- (NSArray *)CTX_noninheritedIdentifierAttributes
+{
+    NSMutableArray *result = [NSMutableArray array];
+    NSArray *noninheritedAttributes = [self noninheritedAttributes];
+    [noninheritedAttributes enumerateObjectsUsingBlock:^(NSAttributeDescription *property, NSUInteger idx, BOOL *stop) {
+        if ([property CTX_isIdentifierInEntity]) {
+            [result addObject:property];
+        }
+    }];
+    return [NSArray arrayWithArray:result];
+}
+
+- (BOOL)CTX_hasNoninheritedIdentifierProperties
+{
+    return ([[self CTX_noninheritedIdentifierAttributes] count] > 0);
+}
+
 @end
 
 @implementation NSPropertyDescription (CTX)
@@ -271,6 +289,18 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
 
 - (BOOL)CTX_isReadonlyInEntity {
     NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionIsReadonlyInEntity_key];
+    if (value != nil) {
+        return stringContainsPositiveResponse(value);
+    }
+    return NO;
+}
+
+@end
+
+@implementation NSAttributeDescription (CTX)
+
+- (BOOL)CTX_isIdentifierInEntity {
+    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionIsIdentifierInEntity_key];
     if (value != nil) {
         return stringContainsPositiveResponse(value);
     }

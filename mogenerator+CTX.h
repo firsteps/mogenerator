@@ -45,6 +45,9 @@
 
 - (NSArray *)CTX_finalSubentities;
 
+- (NSArray *)CTX_noninheritedIdentifierAttributes;
+- (BOOL)CTX_hasNoninheritedIdentifierProperties;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -81,7 +84,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 @interface NSAttributeDescription (CTX)
 
-// No additions so far
+// Marks attributes/relationships as a part of a composite Entity's identifier (used in isEqual:)
+
+- (BOOL)CTX_isIdentifierInEntity;
 
 @end
 
