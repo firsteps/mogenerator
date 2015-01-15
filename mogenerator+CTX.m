@@ -221,6 +221,15 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
     return NO;
 }
 
+- (BOOL)CTX_doesInheritFromCore
+{
+    NSEntityDescription *superentity = [self superentity];
+    if (!superentity) {
+        return NO;
+    }
+    return ([superentity CTX_isCore] || [superentity CTX_doesInheritFromCore]);
+}
+
 - (BOOL)CTX_hasSubentities
 {
     return ([[self subentities] count] > 0);
@@ -256,6 +265,14 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
 - (BOOL)CTX_hasNoninheritedIdentifierProperties
 {
     return ([[self CTX_noninheritedIdentifierAttributes] count] > 0);
+}
+
+- (BOOL)CTX_isUniquelyIdentifiable
+{
+    if ([self CTX_hasNoninheritedIdentifierProperties]) {
+        return YES;
+    }
+    return ([self superentity] && [[self superentity] CTX_isUniquelyIdentifiable]);
 }
 
 @end

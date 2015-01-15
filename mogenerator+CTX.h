@@ -40,6 +40,7 @@
 
 - (BOOL)CTX_isCore;
 - (NSString *)CTX_coreEntityTypeClassName;
+- (BOOL)CTX_doesInheritFromCore;
 
 - (BOOL)CTX_hasSubentities;
 
@@ -47,6 +48,7 @@
 
 - (NSArray *)CTX_noninheritedIdentifierAttributes;
 - (BOOL)CTX_hasNoninheritedIdentifierProperties;
+- (BOOL)CTX_isUniquelyIdentifiable;
 
 @end
 

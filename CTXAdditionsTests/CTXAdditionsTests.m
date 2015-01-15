@@ -363,7 +363,7 @@
 {
     NSString *const userInfoKey = @"com.ef.ctx.mogenerator.entity.isCore";
     
-    NSString *const kAssertMessage = @"[NSRelationshipDescription CTX_shouldBeRepopulatedFromDTOWhenSet] is broken";
+    NSString *const kAssertMessage = @"[NSEntityDescription CTX_doesInheritFromCore] is broken";
     
     NSEntityDescription *entityDescription = [[NSEntityDescription alloc] init];
     XCTAssertFalse([entityDescription CTX_isCore], @"%@", kAssertMessage);
@@ -403,6 +403,68 @@
     entityDescription = [[NSEntityDescription alloc] init];
     [entityDescription setUserInfo:@{userInfoKey : @"Just any string. Any!!!!1!!111"}];
     XCTAssertTrue([entityDescription CTX_isCore], @"%@", kAssertMessage);
+}
+
+- (void)test_NSEntityDescription_doesInheritFromCore
+{
+    NSString *const kAssertMessage = @"[NSEntityDescription CTX_doesInheritFromCore] is broken";
+
+    NSString *entityName = @"VehicleAbstract";
+    NSEntityDescription *entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_doesInheritFromCore], @"%@", kAssertMessage);
+    
+    entityName = @"VehicleShip";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_doesInheritFromCore], @"%@", kAssertMessage);
+    
+    entityName = @"VehiclePlane";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_doesInheritFromCore], @"%@", kAssertMessage);
+    
+    entityName = @"VehicleCar";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_doesInheritFromCore], @"%@", kAssertMessage);
+
+    entityName = @"VehicleCarSport";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertTrue([entity CTX_doesInheritFromCore], @"%@", kAssertMessage);
+    
+    entityName = @"VehicleCarTruck";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertTrue([entity CTX_doesInheritFromCore], @"%@", kAssertMessage);
+}
+
+- (void)test_NSEntityDescription_isUniquelyIdentifiable
+{
+    NSString *const kAssertMessage = @"[NSEntityDescription CTX_isUniquelyIdentifiable] is broken";
+    
+    NSString *entityName = @"VehicleAbstract";
+    NSEntityDescription *entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_isUniquelyIdentifiable], @"%@", kAssertMessage);
+    
+    entityName = @"VehicleShip";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_isUniquelyIdentifiable], @"%@", kAssertMessage);
+    
+    entityName = @"VehiclePlane";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_isUniquelyIdentifiable], @"%@", kAssertMessage);
+    
+    entityName = @"VehicleCar";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertTrue([entity CTX_isUniquelyIdentifiable], @"%@", kAssertMessage);
+    XCTAssertEqual([[entity CTX_noninheritedIdentifierAttributes] count], 1, @"%@", @"Entity should have a single Indentifier Attribute");
+    XCTAssertEqualObjects([[[entity CTX_noninheritedIdentifierAttributes] objectAtIndex:0] name], @"uuid", @"%@", @"Entity should have an Indentifier Attribute: uuid");
+
+    entityName = @"VehicleCarSport";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertTrue([entity CTX_isUniquelyIdentifiable], @"%@", kAssertMessage);
+    XCTAssertEqual([[entity CTX_noninheritedIdentifierAttributes] count], 0, @"%@", @"Entity should not have any Indentifier Attributes");
+    
+    entityName = @"VehicleCarTruck";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertTrue([entity CTX_isUniquelyIdentifiable], @"%@", kAssertMessage);
+    XCTAssertEqual([[entity CTX_noninheritedIdentifierAttributes] count], 0, @"%@", @"Entity should not have any Indentifier Attributes");
 }
 
 - (void)test_NSEntityDescription_attributesPersistingInDTO
@@ -480,7 +542,6 @@
     entity = [[_model entitiesByName] objectForKey:entityName];
     XCTAssertTrue([entity CTX_hasSubentities], @"%@ has subentities", entityName);
     XCTAssertEqual([finalSubentities indexOfObject:entity], NSNotFound, @"Subentities list should contain '%@' abstract entity", entityName);
-    
 }
 
 @end
