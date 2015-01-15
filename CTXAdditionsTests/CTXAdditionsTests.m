@@ -441,30 +441,65 @@
     NSString *entityName = @"VehicleAbstract";
     NSEntityDescription *entity = [[_model entitiesByName] objectForKey:entityName];
     XCTAssertFalse([entity CTX_isUniquelyIdentifiable], @"%@", kAssertMessage);
+    XCTAssertFalse([entity CTX_hasNoninheritedIdentifierProperties], @"%@", kAssertMessage);
     
     entityName = @"VehicleShip";
     entity = [[_model entitiesByName] objectForKey:entityName];
     XCTAssertFalse([entity CTX_isUniquelyIdentifiable], @"%@", kAssertMessage);
+    XCTAssertFalse([entity CTX_hasNoninheritedIdentifierProperties], @"%@", kAssertMessage);
     
     entityName = @"VehiclePlane";
     entity = [[_model entitiesByName] objectForKey:entityName];
     XCTAssertFalse([entity CTX_isUniquelyIdentifiable], @"%@", kAssertMessage);
+    XCTAssertFalse([entity CTX_hasNoninheritedIdentifierProperties], @"%@", kAssertMessage);
     
     entityName = @"VehicleCar";
     entity = [[_model entitiesByName] objectForKey:entityName];
     XCTAssertTrue([entity CTX_isUniquelyIdentifiable], @"%@", kAssertMessage);
     XCTAssertEqual([[entity CTX_noninheritedIdentifierAttributes] count], 1, @"%@", @"Entity should have a single Indentifier Attribute");
     XCTAssertEqualObjects([[[entity CTX_noninheritedIdentifierAttributes] objectAtIndex:0] name], @"uuid", @"%@", @"Entity should have an Indentifier Attribute: uuid");
+    XCTAssertTrue([entity CTX_hasNoninheritedIdentifierProperties], @"%@", kAssertMessage);
 
     entityName = @"VehicleCarSport";
     entity = [[_model entitiesByName] objectForKey:entityName];
     XCTAssertTrue([entity CTX_isUniquelyIdentifiable], @"%@", kAssertMessage);
     XCTAssertEqual([[entity CTX_noninheritedIdentifierAttributes] count], 0, @"%@", @"Entity should not have any Indentifier Attributes");
+    XCTAssertFalse([entity CTX_hasNoninheritedIdentifierProperties], @"%@", kAssertMessage);
     
     entityName = @"VehicleCarTruck";
     entity = [[_model entitiesByName] objectForKey:entityName];
     XCTAssertTrue([entity CTX_isUniquelyIdentifiable], @"%@", kAssertMessage);
     XCTAssertEqual([[entity CTX_noninheritedIdentifierAttributes] count], 0, @"%@", @"Entity should not have any Indentifier Attributes");
+    XCTAssertFalse([entity CTX_hasNoninheritedIdentifierProperties], @"%@", kAssertMessage);
+}
+
+- (void)test_NSEntityDescription_hasNoninheritedIdentifierProperties
+{
+    NSString *const kAssertMessage = @"[NSEntityDescription CTX_hasNoninheritedIdentifierProperties] is broken";
+    
+    NSString *entityName = @"VehicleAbstract";
+    NSEntityDescription *entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_hasNoninheritedIdentifierProperties], @"%@", kAssertMessage);
+    
+    entityName = @"VehicleShip";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_hasNoninheritedIdentifierProperties], @"%@", kAssertMessage);
+    
+    entityName = @"VehiclePlane";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_hasNoninheritedIdentifierProperties], @"%@", kAssertMessage);
+    
+    entityName = @"VehicleCar";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertTrue([entity CTX_hasNoninheritedIdentifierProperties], @"%@", kAssertMessage);
+    
+    entityName = @"VehicleCarSport";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_hasNoninheritedIdentifierProperties], @"%@", kAssertMessage);
+    
+    entityName = @"VehicleCarTruck";
+    entity = [[_model entitiesByName] objectForKey:entityName];
+    XCTAssertFalse([entity CTX_hasNoninheritedIdentifierProperties], @"%@", kAssertMessage);
 }
 
 - (void)test_NSEntityDescription_attributesPersistingInDTO
