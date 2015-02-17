@@ -1093,7 +1093,7 @@ NSString *ApplicationSupportSubdirectoryName = @"mogenerator";
             NSString *machineHFileName = nil;
             if (generatedFilename) {
                 machineHFileName = [machineDir stringByAppendingPathComponent:
-                                    [NSString stringWithFormat:@"_%@.%@", generatedFilename, extension]];
+                                    [NSString stringWithFormat:@"%@.%@", generatedFilename, extension]];
             } else {
                 machineHFileName = [machineDir stringByAppendingPathComponent:
                                     [NSString stringWithFormat:@"_%@.%@", entityClassName, extension]];
@@ -1139,7 +1139,7 @@ NSString *ApplicationSupportSubdirectoryName = @"mogenerator";
                 NSString *machineMFileName = nil;
                 if (generatedFilename) {
                     machineMFileName = [machineDir stringByAppendingPathComponent:
-                            [NSString stringWithFormat:@"_%@.m", generatedFilename]];
+                            [NSString stringWithFormat:@"%@.m", generatedFilename]];
                 } else {
                     machineMFileName = [machineDir stringByAppendingPathComponent:
                             [NSString stringWithFormat:@"_%@.m", entityClassName]];
