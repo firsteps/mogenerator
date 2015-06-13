@@ -41,6 +41,7 @@
 - (BOOL)CTX_isCore;
 - (NSString *)CTX_coreEntityTypeClassName;
 - (BOOL)CTX_doesInheritFromCore;
+- (BOOL)CTX_hasCoreSubentities;
 
 - (BOOL)CTX_hasSubentities;
 

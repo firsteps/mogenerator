@@ -230,6 +230,17 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
     return ([superentity CTX_isCore] || [superentity CTX_doesInheritFromCore]);
 }
 
+- (BOOL)CTX_hasCoreSubentities
+{
+    __block BOOL result = NO;
+    [self.subentities enumerateObjectsUsingBlock:^(NSEntityDescription *entity, NSUInteger idx, BOOL *stop) {
+        result = ([entity CTX_isCore] || [entity CTX_hasCoreSubentities]);
+        *stop = result;
+    }];
+    
+    return result;
+}
+
 - (BOOL)CTX_hasSubentities
 {
     return ([[self subentities] count] > 0);
