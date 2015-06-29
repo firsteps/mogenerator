@@ -81,6 +81,10 @@
 
 - (BOOL)CTX_isReadonlyInEntity;
 
+// Marks attributes/relationships to be "silent" (not emitting Delegate/Observer callbacks) in both Immutable & Mutable Entities (default value is NO)
+
+- (BOOL)CTX_isSilentInEntity;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////

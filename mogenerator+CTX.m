@@ -25,6 +25,7 @@ NSString * const kCTXNSRelationshipDescriptionShouldNotBeDeletedWhenUnset_key = 
 NSString * const kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOWhenSet_key = @"com.ef.ctx.mogenerator.mo.relationship.shouldBeRepopulatedFromDTOWhenSet";
 
 NSString * const kCTXNSPropertyDescriptionIsReadonlyInEntity_key = @"com.ef.ctx.mogenerator.entity.property.isReadonly";
+NSString * const kCTXNSPropertyDescriptionIsSilentInEntity_key = @"com.ef.ctx.mogenerator.entity.property.isSilent";
 NSString * const kCTXNSPropertyDescriptionIsIdentifierInEntity_key = @"com.ef.ctx.mogenerator.entity.property.isIdentifier";
 
 static inline BOOL stringContainsNegativeResponse(NSString *string)
@@ -317,6 +318,14 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
 
 - (BOOL)CTX_isReadonlyInEntity {
     NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionIsReadonlyInEntity_key];
+    if (value != nil) {
+        return stringContainsPositiveResponse(value);
+    }
+    return NO;
+}
+
+- (BOOL)CTX_isSilentInEntity {
+    NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionIsSilentInEntity_key];
     if (value != nil) {
         return stringContainsPositiveResponse(value);
     }
