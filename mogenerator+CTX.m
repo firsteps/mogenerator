@@ -274,14 +274,31 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
     return [NSArray arrayWithArray:result];
 }
 
-- (BOOL)CTX_hasNoninheritedIdentifierProperties
+- (BOOL)CTX_hasNoninheritedIdentifierAttributes
 {
     return ([[self CTX_noninheritedIdentifierAttributes] count] > 0);
 }
 
+- (NSArray *)CTX_noninheritedIdentifierRelationships
+{
+    NSMutableArray *result = [NSMutableArray array];
+    NSArray *noninheritedAttributes = [self noninheritedRelationships];
+    [noninheritedAttributes enumerateObjectsUsingBlock:^(NSRelationshipDescription *relationship, NSUInteger idx, BOOL *stop) {
+        if ([relationship CTX_isIdentifierInEntity]) {
+            [result addObject:relationship];
+        }
+    }];
+    return [NSArray arrayWithArray:result];
+}
+
+- (BOOL)CTX_hasNoninheritedIdentifierRelationships
+{
+    return ([[self CTX_noninheritedIdentifierRelationships] count] > 0);
+}
+
 - (BOOL)CTX_isUniquelyIdentifiable
 {
-    if ([self CTX_hasNoninheritedIdentifierProperties]) {
+    if ([self CTX_hasNoninheritedIdentifierAttributes] || [self CTX_hasNoninheritedIdentifierRelationships]) {
         return YES;
     }
     return ([self superentity] && [[self superentity] CTX_isUniquelyIdentifiable]);
@@ -332,10 +349,6 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
     return NO;
 }
 
-@end
-
-@implementation NSAttributeDescription (CTX)
-
 - (BOOL)CTX_isIdentifierInEntity {
     NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionIsIdentifierInEntity_key];
     if (value != nil) {
@@ -343,6 +356,10 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
     }
     return NO;
 }
+
+@end
+
+@implementation NSAttributeDescription (CTX)
 
 @end
 
