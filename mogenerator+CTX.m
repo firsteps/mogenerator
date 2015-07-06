@@ -18,6 +18,9 @@ NSString * const kCTXNSEntityDescriptionMutableEntityClassName_key = @"com.ef.ct
 NSString * const kCTXNSEntityDescriptionIsCore_key = @"com.ef.ctx.mogenerator.entity.isCore";
 NSString * const kCTXNSEntityDescriptionCoreEntityTypeClassName_key = @"com.ef.ctx.mogenerator.entity.coreEntityType";
 
+NSString * const kCTXNSEntityDescriptionIsSyncable_key = @"com.ef.ctx.mogenerator.entity.isSyncable";
+NSString * const kCTXNSEntityDescriptionSyncableEntityTypeClassName_key = @"com.ef.ctx.mogenerator.entity.syncableEntityType";
+
 NSString * const kCTXNSPropertyDescriptionShouldNotBeExposed_key = @"com.ef.ctx.mogenerator.property.shouldNotBeExposed";
 
 NSString * const kCTXNSPropertyDescriptionIsMandatoryInDTO_key = @"com.ef.ctx.mogenerator.dto.property.mandatory";
@@ -74,6 +77,11 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
     return [NSString stringWithFormat:@"%@CoreEntityType", normalizedManagedObjectClassName(managedObjectClassName)];
 }
 
+static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *managedObjectClassName)
+{
+    return [NSString stringWithFormat:@"%@SyncableEntityType", normalizedManagedObjectClassName(managedObjectClassName)];
+}
+
 @implementation NSEntityDescription (CTX)
 
 - (BOOL)CTX_hasCustomSuperEntity {
@@ -85,7 +93,7 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
 - (NSString *)CTX_dtoClassName
 {
     NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionDTOClassName_key];
-    if (value == nil) {
+    if (!value) {
         value = dtoClassNameForManagedObjectClassName([self managedObjectClassName]);
     }
     return value;
@@ -101,7 +109,7 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
 - (NSString *)CTX_immutableEntityClassName
 {
     NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionImmutableEntityClassName_key];
-    if (value == nil) {
+    if (!value) {
         value = immutableEntityClassNameForManagedObjectClassName([self managedObjectClassName]);
     }
     return value;
@@ -117,7 +125,7 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
 - (NSString *)CTX_mutableEntityClassName
 {
     NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionMutableEntityClassName_key];
-    if (value == nil) {
+    if (!value) {
         value = mutableEntityClassNameForManagedObjectClassName([self managedObjectClassName]);
     }
     return value;
@@ -208,7 +216,7 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
 
 - (NSString *)CTX_coreEntityTypeClassName {
     NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionCoreEntityTypeClassName_key];
-    if (value == nil) {
+    if (!value) {
         value = coreEntityTypeClassNameForManagedObjectClassName([self managedObjectClassName]);
     }
     return value;
@@ -216,7 +224,7 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
 
 - (BOOL)CTX_isCore {
     NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionIsCore_key];
-    if (value != nil) {
+    if (value) {
         return stringContainsPositiveResponse(value);
     }
     return NO;
@@ -236,6 +244,49 @@ static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *mana
     __block BOOL result = NO;
     [self.subentities enumerateObjectsUsingBlock:^(NSEntityDescription *entity, NSUInteger idx, BOOL *stop) {
         result = ([entity CTX_isCore] || [entity CTX_hasCoreSubentities]);
+        *stop = result;
+    }];
+    
+    return result;
+}
+
+- (NSString *)CTX_syncableEntityTypeClassName
+{
+    NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionSyncableEntityTypeClassName_key];
+    if (!value) {
+        value = syncableEntityTypeClassNameForManagedObjectClassName([self managedObjectClassName]);
+    }
+    return value;
+}
+
+- (BOOL)CTX_isFirstLevelSyncable
+{
+    NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionIsSyncable_key];
+    if (value) {
+        return stringContainsPositiveResponse(value);
+    }
+    return NO;
+}
+
+- (BOOL)CTX_doesInheritFromSyncable
+{
+    NSEntityDescription *superentity = [self superentity];
+    if (!superentity) {
+        return NO;
+    }
+    return ([superentity CTX_isFirstLevelSyncable] || [superentity CTX_doesInheritFromSyncable]);
+}
+
+- (BOOL)CTX_isSyncable
+{
+    return ([self CTX_isFirstLevelSyncable] || [self CTX_doesInheritFromSyncable]);
+}
+
+- (BOOL)CTX_hasSyncableSubentities
+{
+    __block BOOL result = NO;
+    [self.subentities enumerateObjectsUsingBlock:^(NSEntityDescription *entity, NSUInteger idx, BOOL *stop) {
+        result = ([entity CTX_isSyncable] || [entity CTX_hasSyncableSubentities]);
         *stop = result;
     }];
     
