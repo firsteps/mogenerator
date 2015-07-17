@@ -317,9 +317,9 @@ static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *
 {
     NSMutableArray *result = [NSMutableArray array];
     NSArray *noninheritedAttributes = [self noninheritedAttributes];
-    [noninheritedAttributes enumerateObjectsUsingBlock:^(NSAttributeDescription *property, NSUInteger idx, BOOL *stop) {
-        if ([property CTX_isIdentifierInEntity]) {
-            [result addObject:property];
+    [noninheritedAttributes enumerateObjectsUsingBlock:^(NSAttributeDescription *attribute, NSUInteger idx, BOOL *stop) {
+        if ([attribute CTX_isIdentifierInEntity]) {
+            [result addObject:attribute];
         }
     }];
     return [NSArray arrayWithArray:result];
@@ -333,8 +333,8 @@ static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *
 - (NSArray *)CTX_noninheritedIdentifierRelationships
 {
     NSMutableArray *result = [NSMutableArray array];
-    NSArray *noninheritedAttributes = [self noninheritedRelationships];
-    [noninheritedAttributes enumerateObjectsUsingBlock:^(NSRelationshipDescription *relationship, NSUInteger idx, BOOL *stop) {
+    NSArray *noninheritedRelationships = [self noninheritedRelationships];
+    [noninheritedRelationships enumerateObjectsUsingBlock:^(NSRelationshipDescription *relationship, NSUInteger idx, BOOL *stop) {
         if ([relationship CTX_isIdentifierInEntity]) {
             [result addObject:relationship];
         }
