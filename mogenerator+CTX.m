@@ -15,9 +15,6 @@ NSString * const kCTXNSEntityDescriptionDTOClassName_key = @"com.ef.ctx.mogenera
 NSString * const kCTXNSEntityDescriptionImmutableEntityClassName_key = @"com.ef.ctx.mogenerator.entity.immutable.className";
 NSString * const kCTXNSEntityDescriptionMutableEntityClassName_key = @"com.ef.ctx.mogenerator.entity.mutable.className";
 
-NSString * const kCTXNSEntityDescriptionIsCore_key = @"com.ef.ctx.mogenerator.entity.isCore";
-NSString * const kCTXNSEntityDescriptionCoreEntityTypeClassName_key = @"com.ef.ctx.mogenerator.entity.coreEntityType";
-
 NSString * const kCTXNSEntityDescriptionIsSyncable_key = @"com.ef.ctx.mogenerator.entity.isSyncable";
 NSString * const kCTXNSEntityDescriptionSyncableEntityTypeClassName_key = @"com.ef.ctx.mogenerator.entity.syncableEntityType";
 
@@ -70,11 +67,6 @@ static NSString *immutableEntityClassNameForManagedObjectClassName(NSString *man
 static NSString *mutableEntityClassNameForManagedObjectClassName(NSString *managedObjectClassName)
 {
     return [NSString stringWithFormat:@"%@MutableEntity", normalizedManagedObjectClassName(managedObjectClassName)];
-}
-
-static NSString *coreEntityTypeClassNameForManagedObjectClassName(NSString *managedObjectClassName)
-{
-    return [NSString stringWithFormat:@"%@CoreEntityType", normalizedManagedObjectClassName(managedObjectClassName)];
 }
 
 static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *managedObjectClassName)
@@ -212,42 +204,6 @@ static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *
 
 - (BOOL)CTX_hasNoninheritedExposedRelationships {
     return ([[self CTX_noninheritedExposedRelationships] count ] > 0);
-}
-
-- (NSString *)CTX_coreEntityTypeClassName {
-    NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionCoreEntityTypeClassName_key];
-    if (!value) {
-        value = coreEntityTypeClassNameForManagedObjectClassName([self managedObjectClassName]);
-    }
-    return value;
-}
-
-- (BOOL)CTX_isCore {
-    NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionIsCore_key];
-    if (value) {
-        return stringContainsPositiveResponse(value);
-    }
-    return NO;
-}
-
-- (BOOL)CTX_doesInheritFromCore
-{
-    NSEntityDescription *superentity = [self superentity];
-    if (!superentity) {
-        return NO;
-    }
-    return ([superentity CTX_isCore] || [superentity CTX_doesInheritFromCore]);
-}
-
-- (BOOL)CTX_hasCoreSubentities
-{
-    __block BOOL result = NO;
-    [self.subentities enumerateObjectsUsingBlock:^(NSEntityDescription *entity, NSUInteger idx, BOOL *stop) {
-        result = ([entity CTX_isCore] || [entity CTX_hasCoreSubentities]);
-        *stop = result;
-    }];
-    
-    return result;
 }
 
 - (NSString *)CTX_syncableEntityTypeClassName

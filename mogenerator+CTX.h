@@ -38,11 +38,6 @@
 - (BOOL)CTX_hasNoninheritedExposedAttributes;
 - (BOOL)CTX_hasNoninheritedExposedRelationships;
 
-- (NSString *)CTX_coreEntityTypeClassName;
-- (BOOL)CTX_isCore;
-- (BOOL)CTX_doesInheritFromCore;
-- (BOOL)CTX_hasCoreSubentities;
-
 - (NSString *)CTX_syncableEntityTypeClassName;
 - (BOOL)CTX_isFirstLevelSyncable;
 - (BOOL)CTX_doesInheritFromSyncable;
