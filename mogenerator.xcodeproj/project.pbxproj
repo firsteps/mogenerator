@@ -7,6 +7,56 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18EDDD141CCF947800BAC9E8 /* CTXAdditionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EDDD131CCF947800BAC9E8 /* CTXAdditionsTests.m */; };
+		18EDDD221CCF94AA00BAC9E8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18EDDD1D1CCF94AA00BAC9E8 /* InfoPlist.strings */; };
+		18EDDD231CCF94AA00BAC9E8 /* TestDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18EDDD1F1CCF94AA00BAC9E8 /* TestDataModel.xcdatamodeld */; };
+		18EDDD281CCF9C6600BAC9E8 /* mogenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* mogenerator.m */; };
+		18EDDD291CCF9C6600BAC9E8 /* mogenerator+CTX.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F3C2301CC7C2DA00F0DB04 /* mogenerator+CTX.m */; };
+		18EDDD2A1CCF9C6600BAC9E8 /* NSString+MORegEx.m in Sources */ = {isa = PBXBuildFile; fileRef = D03C79F21B8BE77500A49BD8 /* NSString+MORegEx.m */; };
+		18EDDD2B1CCF9C6C00BAC9E8 /* _MiscMergeBreakCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF530ACFB51A00F3F141 /* _MiscMergeBreakCommand.m */; };
+		18EDDD2C1CCF9C6C00BAC9E8 /* _MiscMergeCallCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF550ACFB51A00F3F141 /* _MiscMergeCallCommand.m */; };
+		18EDDD2D1CCF9C6C00BAC9E8 /* _MiscMergeCommentCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF570ACFB51A00F3F141 /* _MiscMergeCommentCommand.m */; };
+		18EDDD2E1CCF9C6C00BAC9E8 /* _MiscMergeContinueCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF590ACFB51A00F3F141 /* _MiscMergeContinueCommand.m */; };
+		18EDDD2F1CCF9C6C00BAC9E8 /* _MiscMergeCopyCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF5B0ACFB51A00F3F141 /* _MiscMergeCopyCommand.m */; };
+		18EDDD301CCF9C6C00BAC9E8 /* _MiscMergeDateCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF5D0ACFB51A00F3F141 /* _MiscMergeDateCommand.m */; };
+		18EDDD311CCF9C6C00BAC9E8 /* _MiscMergeDebugCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF5F0ACFB51A00F3F141 /* _MiscMergeDebugCommand.m */; };
+		18EDDD321CCF9C6C00BAC9E8 /* _MiscMergeDelayedParseCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF610ACFB51A00F3F141 /* _MiscMergeDelayedParseCommand.m */; };
+		18EDDD331CCF9C6C00BAC9E8 /* _MiscMergeElseCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF630ACFB51A00F3F141 /* _MiscMergeElseCommand.m */; };
+		18EDDD341CCF9C6C00BAC9E8 /* _MiscMergeElseifCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF650ACFB51A00F3F141 /* _MiscMergeElseifCommand.m */; };
+		18EDDD351CCF9C6C00BAC9E8 /* _MiscMergeEndforeachCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF670ACFB51A00F3F141 /* _MiscMergeEndforeachCommand.m */; };
+		18EDDD361CCF9C6C00BAC9E8 /* _MiscMergeEndifCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF690ACFB51A00F3F141 /* _MiscMergeEndifCommand.m */; };
+		18EDDD371CCF9C6C00BAC9E8 /* _MiscMergeEndloopCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF6B0ACFB51A00F3F141 /* _MiscMergeEndloopCommand.m */; };
+		18EDDD381CCF9C6C00BAC9E8 /* _MiscMergeEndprocedureCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF6D0ACFB51A00F3F141 /* _MiscMergeEndprocedureCommand.m */; };
+		18EDDD391CCF9C6C00BAC9E8 /* _MiscMergeEndwhileCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF6F0ACFB51A00F3F141 /* _MiscMergeEndwhileCommand.m */; };
+		18EDDD3A1CCF9C6C00BAC9E8 /* _MiscMergeFieldCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF710ACFB51A00F3F141 /* _MiscMergeFieldCommand.m */; };
+		18EDDD3B1CCF9C6C00BAC9E8 /* _MiscMergeForeachCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF730ACFB51A00F3F141 /* _MiscMergeForeachCommand.m */; };
+		18EDDD3C1CCF9C6C00BAC9E8 /* _MiscMergeIdentifyCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF750ACFB51A00F3F141 /* _MiscMergeIdentifyCommand.m */; };
+		18EDDD3D1CCF9C6C00BAC9E8 /* _MiscMergeIfCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF770ACFB51A00F3F141 /* _MiscMergeIfCommand.m */; };
+		18EDDD3E1CCF9C6C00BAC9E8 /* _MiscMergeIncludeCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF790ACFB51A00F3F141 /* _MiscMergeIncludeCommand.m */; };
+		18EDDD3F1CCF9C6C00BAC9E8 /* _MiscMergeIndexCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF7B0ACFB51A00F3F141 /* _MiscMergeIndexCommand.m */; };
+		18EDDD401CCF9C6C00BAC9E8 /* _MiscMergeLoopCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF7D0ACFB51A00F3F141 /* _MiscMergeLoopCommand.m */; };
+		18EDDD411CCF9C6C00BAC9E8 /* _MiscMergeNextCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF7F0ACFB51A00F3F141 /* _MiscMergeNextCommand.m */; };
+		18EDDD421CCF9C6C00BAC9E8 /* _MiscMergeOmitCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF810ACFB51A00F3F141 /* _MiscMergeOmitCommand.m */; };
+		18EDDD431CCF9C6C00BAC9E8 /* _MiscMergeOptionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF830ACFB51A00F3F141 /* _MiscMergeOptionCommand.m */; };
+		18EDDD441CCF9C6C00BAC9E8 /* _MiscMergeProcedureCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF850ACFB51A00F3F141 /* _MiscMergeProcedureCommand.m */; };
+		18EDDD451CCF9C6C00BAC9E8 /* _MiscMergeSetCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF870ACFB51A00F3F141 /* _MiscMergeSetCommand.m */; };
+		18EDDD461CCF9C6C00BAC9E8 /* _MiscMergeWhileCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF890ACFB51A00F3F141 /* _MiscMergeWhileCommand.m */; };
+		18EDDD471CCF9C6C00BAC9E8 /* FoundationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2C0580ACFBCB500F3F141 /* FoundationAdditions.m */; };
+		18EDDD481CCF9C6C00BAC9E8 /* KeyValue+MiscMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF8B0ACFB51A00F3F141 /* KeyValue+MiscMerge.m */; };
+		18EDDD491CCF9C6C00BAC9E8 /* MiscMergeCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF8D0ACFB51A00F3F141 /* MiscMergeCommand.m */; };
+		18EDDD4A1CCF9C6C00BAC9E8 /* MiscMergeCommandBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF8F0ACFB51A00F3F141 /* MiscMergeCommandBlock.m */; };
+		18EDDD4B1CCF9C6C00BAC9E8 /* MiscMergeDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF910ACFB51A00F3F141 /* MiscMergeDriver.m */; };
+		18EDDD4C1CCF9C6C00BAC9E8 /* MiscMergeEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF930ACFB51A00F3F141 /* MiscMergeEngine.m */; };
+		18EDDD4D1CCF9C6C00BAC9E8 /* MiscMergeExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF950ACFB51A00F3F141 /* MiscMergeExpression.m */; };
+		18EDDD4E1CCF9C6C00BAC9E8 /* MiscMergeFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF970ACFB51A00F3F141 /* MiscMergeFunctions.m */; };
+		18EDDD4F1CCF9C6C00BAC9E8 /* MiscMergeTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF9A0ACFB51A00F3F141 /* MiscMergeTemplate.m */; };
+		18EDDD501CCF9C6C00BAC9E8 /* NSNull.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF9C0ACFB51A00F3F141 /* NSNull.m */; };
+		18EDDD511CCF9C6C00BAC9E8 /* NSScanner+MiscMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BF9E0ACFB51A00F3F141 /* NSScanner+MiscMerge.m */; };
+		18EDDD521CCF9C6C00BAC9E8 /* NSString+MiscAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D2BFA00ACFB51A00F3F141 /* NSString+MiscAdditions.m */; };
+		18EDDD531CCF9C7600BAC9E8 /* DDCliParseException.m in Sources */ = {isa = PBXBuildFile; fileRef = 55200F9C0C4A2CA800018A42 /* DDCliParseException.m */; };
+		18EDDD541CCF9C7600BAC9E8 /* DDCliApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 55200E900C49FEEA00018A42 /* DDCliApplication.m */; };
+		18EDDD551CCF9C7600BAC9E8 /* DDCliUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 55200E920C49FEEA00018A42 /* DDCliUtil.m */; };
+		18EDDD561CCF9C7600BAC9E8 /* DDGetoptLongParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 55200E950C49FEEA00018A42 /* DDGetoptLongParser.m */; };
 		18F3C2311CC7C2DA00F0DB04 /* mogenerator+CTX.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F3C2301CC7C2DA00F0DB04 /* mogenerator+CTX.m */; };
 		457C26CD139A1EF900BF00DD /* MKCDAGNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C26C8139A1EF900BF00DD /* MKCDAGNode.m */; };
 		457C26CE139A1EF900BF00DD /* MKCNSEntityDescriptionAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C26CA139A1EF900BF00DD /* MKCNSEntityDescriptionAdditions.m */; };
@@ -72,6 +122,14 @@
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* mogenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mogenerator.m; sourceTree = "<group>"; usesTabs = 0; };
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		18EDDD111CCF947800BAC9E8 /* CTXAdditionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTXAdditionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18EDDD131CCF947800BAC9E8 /* CTXAdditionsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTXAdditionsTests.m; sourceTree = "<group>"; };
+		18EDDD151CCF947800BAC9E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18EDDD191CCF94A900BAC9E8 /* CTXAdditionsTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CTXAdditionsTests-Info.plist"; sourceTree = "<group>"; };
+		18EDDD1A1CCF94AA00BAC9E8 /* CTXAdditionsTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTXAdditionsTests-Prefix.pch"; sourceTree = "<group>"; };
+		18EDDD1B1CCF94AA00BAC9E8 /* CTXAdditionsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTXAdditionsTests.h; sourceTree = "<group>"; };
+		18EDDD1E1CCF94AA00BAC9E8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		18EDDD201CCF94AA00BAC9E8 /* TestDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestDataModel.xcdatamodel; sourceTree = "<group>"; };
 		18F3C22F1CC7C2DA00F0DB04 /* mogenerator+CTX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mogenerator+CTX.h"; sourceTree = "<group>"; };
 		18F3C2301CC7C2DA00F0DB04 /* mogenerator+CTX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "mogenerator+CTX.m"; sourceTree = "<group>"; };
 		32A70AAB03705E1F00C91783 /* mogenerator_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mogenerator_Prefix.pch; sourceTree = "<group>"; };
@@ -194,6 +252,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		18EDDD0E1CCF947800BAC9E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD76F9B0486AA7600D96B5E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -216,6 +281,7 @@
 				457C26C6139A1EF900BF00DD /* ponso */,
 				55200E8E0C49FEEA00018A42 /* ddcli */,
 				08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */,
+				18EDDD121CCF947800BAC9E8 /* CTXAdditionsTests */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = mogenerator;
@@ -224,13 +290,13 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				32A70AAB03705E1F00C91783 /* mogenerator_Prefix.pch */,
 				79A586510E48E8B400474C35 /* mogenerator.h */,
 				08FB7796FE84155DC02AAC07 /* mogenerator.m */,
 				18F3C22F1CC7C2DA00F0DB04 /* mogenerator+CTX.h */,
 				18F3C2301CC7C2DA00F0DB04 /* mogenerator+CTX.m */,
 				D03C79F11B8BE77500A49BD8 /* NSString+MORegEx.h */,
 				D03C79F21B8BE77500A49BD8 /* NSString+MORegEx.m */,
+				32A70AAB03705E1F00C91783 /* mogenerator_Prefix.pch */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -245,10 +311,33 @@
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
 		};
+		18EDDD121CCF947800BAC9E8 /* CTXAdditionsTests */ = {
+			isa = PBXGroup;
+			children = (
+				18EDDD191CCF94A900BAC9E8 /* CTXAdditionsTests-Info.plist */,
+				18EDDD1A1CCF94AA00BAC9E8 /* CTXAdditionsTests-Prefix.pch */,
+				18EDDD1B1CCF94AA00BAC9E8 /* CTXAdditionsTests.h */,
+				18EDDD131CCF947800BAC9E8 /* CTXAdditionsTests.m */,
+				18EDDD1C1CCF94AA00BAC9E8 /* en.lproj */,
+				18EDDD151CCF947800BAC9E8 /* Info.plist */,
+				18EDDD1F1CCF94AA00BAC9E8 /* TestDataModel.xcdatamodeld */,
+			);
+			path = CTXAdditionsTests;
+			sourceTree = "<group>";
+		};
+		18EDDD1C1CCF94AA00BAC9E8 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				18EDDD1D1CCF94AA00BAC9E8 /* InfoPlist.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				8DD76FA10486AA7600D96B5E /* mogenerator-ctx */,
+				18EDDD111CCF947800BAC9E8 /* CTXAdditionsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -394,6 +483,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		18EDDD101CCF947800BAC9E8 /* CTXAdditionsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18EDDD181CCF947800BAC9E8 /* Build configuration list for PBXNativeTarget "CTXAdditionsTests" */;
+			buildPhases = (
+				18EDDD0D1CCF947800BAC9E8 /* Sources */,
+				18EDDD0E1CCF947800BAC9E8 /* Frameworks */,
+				18EDDD0F1CCF947800BAC9E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CTXAdditionsTests;
+			productName = CTXAdditionsTests;
+			productReference = 18EDDD111CCF947800BAC9E8 /* CTXAdditionsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8DD76F960486AA7600D96B5E /* mogenerator */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "mogenerator" */;
@@ -419,6 +525,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					18EDDD101CCF947800BAC9E8 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
 			};
 			buildConfigurationList = 1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "mogenerator" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -432,9 +543,21 @@
 			projectRoot = "";
 			targets = (
 				8DD76F960486AA7600D96B5E /* mogenerator */,
+				18EDDD101CCF947800BAC9E8 /* CTXAdditionsTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18EDDD0F1CCF947800BAC9E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18EDDD221CCF94AA00BAC9E8 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		7956A85B152E4A500081B5CA /* ShellScript */ = {
@@ -460,6 +583,62 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		18EDDD0D1CCF947800BAC9E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18EDDD471CCF9C6C00BAC9E8 /* FoundationAdditions.m in Sources */,
+				18EDDD421CCF9C6C00BAC9E8 /* _MiscMergeOmitCommand.m in Sources */,
+				18EDDD441CCF9C6C00BAC9E8 /* _MiscMergeProcedureCommand.m in Sources */,
+				18EDDD501CCF9C6C00BAC9E8 /* NSNull.m in Sources */,
+				18EDDD551CCF9C7600BAC9E8 /* DDCliUtil.m in Sources */,
+				18EDDD2E1CCF9C6C00BAC9E8 /* _MiscMergeContinueCommand.m in Sources */,
+				18EDDD401CCF9C6C00BAC9E8 /* _MiscMergeLoopCommand.m in Sources */,
+				18EDDD351CCF9C6C00BAC9E8 /* _MiscMergeEndforeachCommand.m in Sources */,
+				18EDDD2A1CCF9C6600BAC9E8 /* NSString+MORegEx.m in Sources */,
+				18EDDD2C1CCF9C6C00BAC9E8 /* _MiscMergeCallCommand.m in Sources */,
+				18EDDD491CCF9C6C00BAC9E8 /* MiscMergeCommand.m in Sources */,
+				18EDDD2D1CCF9C6C00BAC9E8 /* _MiscMergeCommentCommand.m in Sources */,
+				18EDDD4F1CCF9C6C00BAC9E8 /* MiscMergeTemplate.m in Sources */,
+				18EDDD481CCF9C6C00BAC9E8 /* KeyValue+MiscMerge.m in Sources */,
+				18EDDD321CCF9C6C00BAC9E8 /* _MiscMergeDelayedParseCommand.m in Sources */,
+				18EDDD331CCF9C6C00BAC9E8 /* _MiscMergeElseCommand.m in Sources */,
+				18EDDD521CCF9C6C00BAC9E8 /* NSString+MiscAdditions.m in Sources */,
+				18EDDD381CCF9C6C00BAC9E8 /* _MiscMergeEndprocedureCommand.m in Sources */,
+				18EDDD311CCF9C6C00BAC9E8 /* _MiscMergeDebugCommand.m in Sources */,
+				18EDDD3D1CCF9C6C00BAC9E8 /* _MiscMergeIfCommand.m in Sources */,
+				18EDDD561CCF9C7600BAC9E8 /* DDGetoptLongParser.m in Sources */,
+				18EDDD141CCF947800BAC9E8 /* CTXAdditionsTests.m in Sources */,
+				18EDDD2F1CCF9C6C00BAC9E8 /* _MiscMergeCopyCommand.m in Sources */,
+				18EDDD4B1CCF9C6C00BAC9E8 /* MiscMergeDriver.m in Sources */,
+				18EDDD361CCF9C6C00BAC9E8 /* _MiscMergeEndifCommand.m in Sources */,
+				18EDDD541CCF9C7600BAC9E8 /* DDCliApplication.m in Sources */,
+				18EDDD3A1CCF9C6C00BAC9E8 /* _MiscMergeFieldCommand.m in Sources */,
+				18EDDD411CCF9C6C00BAC9E8 /* _MiscMergeNextCommand.m in Sources */,
+				18EDDD301CCF9C6C00BAC9E8 /* _MiscMergeDateCommand.m in Sources */,
+				18EDDD4A1CCF9C6C00BAC9E8 /* MiscMergeCommandBlock.m in Sources */,
+				18EDDD371CCF9C6C00BAC9E8 /* _MiscMergeEndloopCommand.m in Sources */,
+				18EDDD341CCF9C6C00BAC9E8 /* _MiscMergeElseifCommand.m in Sources */,
+				18EDDD2B1CCF9C6C00BAC9E8 /* _MiscMergeBreakCommand.m in Sources */,
+				18EDDD431CCF9C6C00BAC9E8 /* _MiscMergeOptionCommand.m in Sources */,
+				18EDDD4E1CCF9C6C00BAC9E8 /* MiscMergeFunctions.m in Sources */,
+				18EDDD4C1CCF9C6C00BAC9E8 /* MiscMergeEngine.m in Sources */,
+				18EDDD451CCF9C6C00BAC9E8 /* _MiscMergeSetCommand.m in Sources */,
+				18EDDD461CCF9C6C00BAC9E8 /* _MiscMergeWhileCommand.m in Sources */,
+				18EDDD391CCF9C6C00BAC9E8 /* _MiscMergeEndwhileCommand.m in Sources */,
+				18EDDD291CCF9C6600BAC9E8 /* mogenerator+CTX.m in Sources */,
+				18EDDD3B1CCF9C6C00BAC9E8 /* _MiscMergeForeachCommand.m in Sources */,
+				18EDDD3F1CCF9C6C00BAC9E8 /* _MiscMergeIndexCommand.m in Sources */,
+				18EDDD231CCF94AA00BAC9E8 /* TestDataModel.xcdatamodeld in Sources */,
+				18EDDD4D1CCF9C6C00BAC9E8 /* MiscMergeExpression.m in Sources */,
+				18EDDD281CCF9C6600BAC9E8 /* mogenerator.m in Sources */,
+				18EDDD3C1CCF9C6C00BAC9E8 /* _MiscMergeIdentifyCommand.m in Sources */,
+				18EDDD511CCF9C6C00BAC9E8 /* NSScanner+MiscMerge.m in Sources */,
+				18EDDD531CCF9C7600BAC9E8 /* DDCliParseException.m in Sources */,
+				18EDDD3E1CCF9C6C00BAC9E8 /* _MiscMergeIncludeCommand.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD76F990486AA7600D96B5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -526,7 +705,117 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		18EDDD1D1CCF94AA00BAC9E8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18EDDD1E1CCF94AA00BAC9E8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		18EDDD161CCF947800BAC9E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "CTXAdditionsTests/CTXAdditionsTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "CTXAdditionsTests/CTXAdditionsTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		18EDDD171CCF947800BAC9E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "CTXAdditionsTests/CTXAdditionsTests-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "CTXAdditionsTests/CTXAdditionsTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		1DEB927508733DD40010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -594,6 +883,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		18EDDD181CCF947800BAC9E8 /* Build configuration list for PBXNativeTarget "CTXAdditionsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18EDDD161CCF947800BAC9E8 /* Debug */,
+				18EDDD171CCF947800BAC9E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "mogenerator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -613,6 +910,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		18EDDD1F1CCF94AA00BAC9E8 /* TestDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				18EDDD201CCF94AA00BAC9E8 /* TestDataModel.xcdatamodel */,
+			);
+			currentVersion = 18EDDD201CCF94AA00BAC9E8 /* TestDataModel.xcdatamodel */;
+			path = TestDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
 }
