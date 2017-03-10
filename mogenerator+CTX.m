@@ -28,7 +28,7 @@ NSString * const kCTXNSPropertyDescriptionIsReadonlyInEntity_key = @"com.ef.ctx.
 NSString * const kCTXNSPropertyDescriptionIsSilentInEntity_key = @"com.ef.ctx.mogenerator.entity.property.isSilent";
 NSString * const kCTXNSPropertyDescriptionIsIdentifierInEntity_key = @"com.ef.ctx.mogenerator.entity.property.isIdentifier";
 
-static inline BOOL stringContainsNegativeResponse(NSString *string)
+inline BOOL CTX_stringContainsNegativeResponse(NSString *string)
 {
     NSString *normalizedString = [[string lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     return ([normalizedString isEqualToString:@"no"] ||
@@ -36,12 +36,12 @@ static inline BOOL stringContainsNegativeResponse(NSString *string)
 }
 
 // String which doesn't contain negative response is considered as containing a positive one.
-static inline BOOL stringContainsPositiveResponse(NSString *string)
+inline BOOL CTX_stringContainsPositiveResponse(NSString *string)
 {
-    return (!stringContainsNegativeResponse(string));
+    return (!CTX_stringContainsNegativeResponse(string));
 }
 
-static NSString *normalizedManagedObjectClassName(NSString *managedObjectClassName)
+NSString *CTX_normalizedManagedObjectClassName(NSString *managedObjectClassName)
 {
     static NSString * const kMOSuffix = @"MO";
 
@@ -56,22 +56,22 @@ static NSString *normalizedManagedObjectClassName(NSString *managedObjectClassNa
 
 static NSString *dtoClassNameForManagedObjectClassName(NSString *managedObjectClassName)
 {
-    return [NSString stringWithFormat:@"%@DTO", normalizedManagedObjectClassName(managedObjectClassName)];
+    return [NSString stringWithFormat:@"%@DTO", CTX_normalizedManagedObjectClassName(managedObjectClassName)];
 }
 
 static NSString *immutableEntityClassNameForManagedObjectClassName(NSString *managedObjectClassName)
 {
-    return [NSString stringWithFormat:@"%@ImmutableEntity", normalizedManagedObjectClassName(managedObjectClassName)];
+    return [NSString stringWithFormat:@"%@ImmutableEntity", CTX_normalizedManagedObjectClassName(managedObjectClassName)];
 }
 
 static NSString *mutableEntityClassNameForManagedObjectClassName(NSString *managedObjectClassName)
 {
-    return [NSString stringWithFormat:@"%@MutableEntity", normalizedManagedObjectClassName(managedObjectClassName)];
+    return [NSString stringWithFormat:@"%@MutableEntity", CTX_normalizedManagedObjectClassName(managedObjectClassName)];
 }
 
 static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *managedObjectClassName)
 {
-    return [NSString stringWithFormat:@"%@SyncableEntityType", normalizedManagedObjectClassName(managedObjectClassName)];
+    return [NSString stringWithFormat:@"%@SyncableEntityType", CTX_normalizedManagedObjectClassName(managedObjectClassName)];
 }
 
 @implementation NSEntityDescription (CTX)
@@ -219,7 +219,7 @@ static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *
 {
     NSString *value = [self.userInfo objectForKey:kCTXNSEntityDescriptionIsSyncable_key];
     if (value) {
-        return stringContainsPositiveResponse(value);
+        return CTX_stringContainsPositiveResponse(value);
     }
     return NO;
 }
@@ -321,7 +321,7 @@ static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *
     if (value != nil) {
         // Method checks for the negative value of User Info's property, because it is intended to be set,
         // when user doesn't want property to be persisted in DTO.
-        return stringContainsNegativeResponse(value);
+        return CTX_stringContainsNegativeResponse(value);
     }
     return YES;
 }
@@ -335,7 +335,7 @@ static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *
 {
     NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionIsMandatoryInDTO_key];
     if (value != nil) {
-        return stringContainsPositiveResponse(value);
+        return CTX_stringContainsPositiveResponse(value);
     }
     return NO;
 }
@@ -343,7 +343,7 @@ static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *
 - (BOOL)CTX_isReadonlyInEntity {
     NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionIsReadonlyInEntity_key];
     if (value != nil) {
-        return stringContainsPositiveResponse(value);
+        return CTX_stringContainsPositiveResponse(value);
     }
     return NO;
 }
@@ -351,7 +351,7 @@ static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *
 - (BOOL)CTX_isSilentInEntity {
     NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionIsSilentInEntity_key];
     if (value != nil) {
-        return stringContainsPositiveResponse(value);
+        return CTX_stringContainsPositiveResponse(value);
     }
     return NO;
 }
@@ -359,7 +359,7 @@ static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *
 - (BOOL)CTX_isIdentifierInEntity {
     NSString *value = [self.userInfo objectForKey:kCTXNSPropertyDescriptionIsIdentifierInEntity_key];
     if (value != nil) {
-        return stringContainsPositiveResponse(value);
+        return CTX_stringContainsPositiveResponse(value);
     }
     return NO;
 }
@@ -378,7 +378,7 @@ static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *
     if (value != nil) {
         // Method checks for the negative value of User Info's property, because it is intended to be set,
         // when user doesn't want property to be deleted when unset.
-        return stringContainsNegativeResponse(value);
+        return CTX_stringContainsNegativeResponse(value);
     }
     return YES;
 }
@@ -387,7 +387,7 @@ static NSString *syncableEntityTypeClassNameForManagedObjectClassName(NSString *
 {
     NSString *value = [self.userInfo objectForKey:kCTXNSRelationshipDescriptionShouldBeRepopulatedFromDTOWhenSet_key];
     if (value != nil) {
-        return stringContainsPositiveResponse(value);
+        return CTX_stringContainsPositiveResponse(value);
     }
     return NO;
 }

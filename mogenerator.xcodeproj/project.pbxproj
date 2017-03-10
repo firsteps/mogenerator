@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		075094EF1E6E239F00633317 /* mogenerator+firsteps.m in Sources */ = {isa = PBXBuildFile; fileRef = 075094EE1E6E239F00633317 /* mogenerator+firsteps.m */; };
 		18EDDD141CCF947800BAC9E8 /* CTXAdditionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EDDD131CCF947800BAC9E8 /* CTXAdditionsTests.m */; };
 		18EDDD221CCF94AA00BAC9E8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18EDDD1D1CCF94AA00BAC9E8 /* InfoPlist.strings */; };
 		18EDDD231CCF94AA00BAC9E8 /* TestDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18EDDD1F1CCF94AA00BAC9E8 /* TestDataModel.xcdatamodeld */; };
@@ -120,6 +121,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		075094ED1E6E239F00633317 /* mogenerator+firsteps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mogenerator+firsteps.h"; sourceTree = "<group>"; };
+		075094EE1E6E239F00633317 /* mogenerator+firsteps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "mogenerator+firsteps.m"; sourceTree = "<group>"; };
 		08FB7796FE84155DC02AAC07 /* mogenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mogenerator.m; sourceTree = "<group>"; usesTabs = 0; };
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		18EDDD111CCF947800BAC9E8 /* CTXAdditionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTXAdditionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,7 +235,7 @@
 		79D2BFA00ACFB51A00F3F141 /* NSString+MiscAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MiscAdditions.m"; path = "../MiscMerge/NSString+MiscAdditions.m"; sourceTree = "<group>"; };
 		79D2C0570ACFBCB500F3F141 /* FoundationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundationAdditions.h; sourceTree = "<group>"; };
 		79D2C0580ACFBCB500F3F141 /* FoundationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundationAdditions.m; sourceTree = "<group>"; };
-		8DD76FA10486AA7600D96B5E /* mogenerator-ctx */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "mogenerator-ctx"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD76FA10486AA7600D96B5E /* mogenerator-firsteps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "mogenerator-firsteps"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03C79F11B8BE77500A49BD8 /* NSString+MORegEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MORegEx.h"; path = "categories/NSString+MORegEx.h"; sourceTree = "<group>"; };
 		D03C79F21B8BE77500A49BD8 /* NSString+MORegEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MORegEx.m"; path = "categories/NSString+MORegEx.m"; sourceTree = "<group>"; };
 		EE5ED86517332E020013CCD1 /* NSManagedObjectModel+momcom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectModel+momcom.h"; sourceTree = "<group>"; };
@@ -294,6 +297,8 @@
 				08FB7796FE84155DC02AAC07 /* mogenerator.m */,
 				18F3C22F1CC7C2DA00F0DB04 /* mogenerator+CTX.h */,
 				18F3C2301CC7C2DA00F0DB04 /* mogenerator+CTX.m */,
+				075094ED1E6E239F00633317 /* mogenerator+firsteps.h */,
+				075094EE1E6E239F00633317 /* mogenerator+firsteps.m */,
 				D03C79F11B8BE77500A49BD8 /* NSString+MORegEx.h */,
 				D03C79F21B8BE77500A49BD8 /* NSString+MORegEx.m */,
 				32A70AAB03705E1F00C91783 /* mogenerator_Prefix.pch */,
@@ -336,7 +341,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8DD76FA10486AA7600D96B5E /* mogenerator-ctx */,
+				8DD76FA10486AA7600D96B5E /* mogenerator-firsteps */,
 				18EDDD111CCF947800BAC9E8 /* CTXAdditionsTests.xctest */,
 			);
 			name = Products;
@@ -515,7 +520,7 @@
 			name = mogenerator;
 			productInstallPath = "$(HOME)/bin";
 			productName = mogenerator;
-			productReference = 8DD76FA10486AA7600D96B5E /* mogenerator-ctx */;
+			productReference = 8DD76FA10486AA7600D96B5E /* mogenerator-firsteps */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -692,6 +697,7 @@
 				457C26CD139A1EF900BF00DD /* MKCDAGNode.m in Sources */,
 				457C26CE139A1EF900BF00DD /* MKCNSEntityDescriptionAdditions.m in Sources */,
 				457C26CF139A1EF900BF00DD /* MKCNSManagedObjectModelAdditions.m in Sources */,
+				075094EF1E6E239F00633317 /* mogenerator+firsteps.m in Sources */,
 				EE5ED87317332E020013CCD1 /* NSManagedObjectModel+momcom.m in Sources */,
 				EE5ED87417332E020013CCD1 /* NSEntityDescription+momcom.m in Sources */,
 				EE5ED87517332E020013CCD1 /* NSAttributeDescription+momcom.m in Sources */,
@@ -835,7 +841,7 @@
 					__info_plist,
 					"$(DERIVED_FILE_DIR)/mogenerator-Info.plist",
 				);
-				PRODUCT_NAME = "mogenerator-ctx";
+				PRODUCT_NAME = "mogenerator-firsteps";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -857,7 +863,7 @@
 					__info_plist,
 					"$(DERIVED_FILE_DIR)/mogenerator-Info.plist",
 				);
-				PRODUCT_NAME = "mogenerator-ctx";
+				PRODUCT_NAME = "mogenerator-firsteps";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -890,6 +896,7 @@
 				18EDDD171CCF947800BAC9E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "mogenerator" */ = {
 			isa = XCConfigurationList;

@@ -9,10 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+extern inline BOOL CTX_stringContainsNegativeResponse(NSString *string);
+extern inline BOOL CTX_stringContainsPositiveResponse(NSString *string);
+
+extern NSString *CTX_normalizedManagedObjectClassName(NSString *managedObjectClassName);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 @interface NSEntityDescription (CTX)
+
+- (BOOL)CTX_hasCustomSuperEntity;
 
 - (NSString *)CTX_dtoClassName;
 - (NSString *)CTX_dtoSuperclassName;
