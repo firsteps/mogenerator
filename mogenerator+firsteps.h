@@ -16,6 +16,9 @@
 - (NSString *)firsteps_stateClassName;
 - (NSString *)firsteps_stateSuperclassName;
 
+- (NSString *)firsteps_stateDataClassName;
+- (NSString *)firsteps_stateDataSuperclassName;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////

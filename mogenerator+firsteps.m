@@ -14,20 +14,33 @@
 
 static NSString *stateClassNameForManagedObjectClassName(NSString *managedObjectClassName)
 {
-    return [NSString stringWithFormat:@"%@State", CTX_normalizedManagedObjectClassName(managedObjectClassName)];
+    return CTX_normalizedManagedObjectClassName(managedObjectClassName);
 }
 
 @implementation NSEntityDescription (firsteps)
 
 - (NSString *)firsteps_stateClassName
 {
-    return stateClassNameForManagedObjectClassName([self managedObjectClassName]);;
+    return stateClassNameForManagedObjectClassName([self managedObjectClassName]);
 }
 
 - (NSString *)firsteps_stateSuperclassName
 {
     if ([self CTX_hasCustomSuperEntity]) {
         return [[self superentity] firsteps_stateClassName];
+    }
+    return @"NSObject";
+}
+
+- (NSString *)firsteps_stateDataClassName
+{
+    return [NSString stringWithFormat:@"%@Data", stateClassNameForManagedObjectClassName([self managedObjectClassName])];
+}
+
+- (NSString *)firsteps_stateDataSuperclassName
+{
+    if ([self CTX_hasCustomSuperEntity]) {
+        return [[self superentity] firsteps_stateDataClassName];
     }
     return @"NSObject";
 }
